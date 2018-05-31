@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/05/29 17:16:40 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/05/30 16:26:28 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,3 +17,15 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# define WIN 1000
+
+typedef struct	s_env
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*image;
+	int			*data;
+	int			bbp;
+	int			size;
+	int			endian;
+}				t_env;
