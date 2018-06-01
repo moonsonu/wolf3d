@@ -3,5 +3,6 @@
 *.o
 *.a
 .nf*
+wolf3d
 .*
 !.gitigore
