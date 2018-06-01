@@ -6,11 +6,14 @@
 #    By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/29 17:16:50 by ksonu             #+#    #+#              #
-#    Updated: 2018/05/31 20:15:52 by ksonu            ###   ########.fr        #
+#    Updated: 2018/05/31 21:59:55 by ksonu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = main.c 
+SRC = main.c	\
+	  init.c	\
+	  map.c		\
+	  wolf.c
 OBJ = $(SRC:.c=.o)
 MLX = -L $(MLXDIR) -lmlx -framework OpenGL -framework Appkit
 

@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/05/31 20:19:29 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/05/31 22:54:48 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,27 @@
 # include <stdlib.h>
 # define WIN 1000
 
+typedef struct	s_ray
+{
+	double		posX;
+	double		posY;
+	double		dirX;
+	double		dirY;
+	double		planeX;
+	double		planeY;
+	double		raydirX;
+	double		raydirY;
+	int			mapX;
+	int			mapY;
+	double		cameraX;
+	double		deltadistX;
+	double		deltadistY;
+	double		sidedistX;
+	double		sidedistY;
+	int			stepX;
+	int			stepY;
+}				t_ray;
+
 typedef struct	s_map
 {
 	int			**map;
@@ -28,6 +49,7 @@ typedef struct	s_map
 
 typedef struct	s_env
 {
+	t_ray		ray;
 	t_map		map;
 	void		*mlx_ptr;
 	void		*win_ptr;
