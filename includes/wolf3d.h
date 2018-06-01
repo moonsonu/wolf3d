@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/05/30 16:26:28 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/05/31 20:19:29 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,16 @@
 # include <stdlib.h>
 # define WIN 1000
 
+typedef struct	s_map
+{
+	int			**map;
+	int			row;
+	int			col;
+}				t_map;
+
 typedef struct	s_env
 {
+	t_map		map;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*image;
@@ -29,3 +37,5 @@ typedef struct	s_env
 	int			size;
 	int			endian;
 }				t_env;
+
+#endif
