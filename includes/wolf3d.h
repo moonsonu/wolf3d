@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/05/31 22:54:48 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/01 20:11:24 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# define WIN 1000
+# include <stdio.h>
+# define WINDOW 1000
+# define TEXTWD 64
+# define TEXTHT 64
+//# define MAPWD 24
+//# define MAPHT 24
 
 typedef struct	s_ray
 {
@@ -38,6 +43,10 @@ typedef struct	s_ray
 	double		sidedistY;
 	int			stepX;
 	int			stepY;
+	double		perpwalldist;
+	double		wallX;
+	int			lineheight;
+	int			side;
 }				t_ray;
 
 typedef struct	s_map
@@ -58,6 +67,34 @@ typedef struct	s_env
 	int			bbp;
 	int			size;
 	int			endian;
+	int			*texture[8];
+	int			xorcolor;
+	int			ycolor;
+	int			xycolor;
 }				t_env;
 
+/*
+** main.c
+*/
+
+/*
+** init.c
+*/
+void			init_mlx(t_env *m);
+void			init_env(t_env *m);
+void			init_texture(t_env *m);
+
+/* 
+**map.c
+*/
+void			map_malloc(t_env *m);
+void			map_read(t_env *m, char *av);
+void			map_size(t_env *m, char *av);
+
+/*
+** wolf.c
+*/
+void			plot(t_env *m, int x, int start, int end);
+void			wolf(t_env *m, t_ray *r);
+void			raycasting(t_env *m, t_ray *r);
 #endif
