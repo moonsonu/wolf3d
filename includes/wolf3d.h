@@ -47,6 +47,17 @@ typedef struct	s_ray
 	double		wallX;
 	int			lineheight;
 	int			side;
+	int			hit;
+	double		floorX;
+	double		floorY;
+	double		distwall;
+	double		distpos;
+	double		distcurr;
+	double		weight;
+	double		currfloorX;
+	double		currfloorY;
+	int			floortextX;
+	int			floortextY;
 }				t_ray;
 
 typedef struct	s_map
@@ -95,6 +106,6 @@ void			map_size(t_env *m, char *av);
 ** wolf.c
 */
 void			plot(t_env *m, int x, int start, int end);
-void			wolf(t_env *m, t_ray *r);
+void			wolf(t_env *m, t_ray *r, int x);
 void			raycasting(t_env *m, t_ray *r);
 #endif
