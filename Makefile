@@ -13,7 +13,8 @@
 SRC = main.c	\
 	  init.c	\
 	  map.c		\
-	  wolf.c
+	  wolf.c	\
+	  hooks.c
 OBJ = $(SRC:.c=.o)
 MLX = -L $(MLXDIR) -fsanitize=address -lmlx -framework OpenGL -framework Appkit
 

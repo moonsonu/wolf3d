@@ -14,8 +14,8 @@
 
 void	init_mlx(t_env *m)
 {
-	m->mlx_ptr = mlx_init();
-	m->win_ptr = mlx_new_window(m->mlx_ptr, WINDOW, WINDOW, "WOLF3D - ksonu");
+	//m->mlx_ptr = mlx_init();
+	//m->win_ptr = mlx_new_window(m->mlx_ptr, WINDOW, WINDOW, "WOLF3D - ksonu");
 	m->image = mlx_new_image(m->mlx_ptr, WINDOW, WINDOW);
 	m->data = (int*)mlx_get_data_addr(m->image, &m->bbp, &m->size, &m->endian);
 }
@@ -23,8 +23,8 @@ void	init_mlx(t_env *m)
 void	init_env(t_env *m)
 {
 	int		i;
-	m->ray.posX = 22;
-	m->ray.posY = 12;
+	m->ray.posX = 2;
+	m->ray.posY = 1;
 	m->ray.dirX = -1;
 	m->ray.dirY = 0;
 	m->ray.planeX = 0;

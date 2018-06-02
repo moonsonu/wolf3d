@@ -77,63 +77,62 @@ void		plot(t_env *m, int x, int start, int end)
 		m->data[x + ((WINDOW - y) * m->size) / 4] =
 		m->texture[5][TEXTHT * m->ray.floortextY + m->ray.floortextX];
 	}
-
 }
 
-void		wolf(t_env *m, t_ray *r, int x)
+void		wolf(t_env *m, int x)
 {
-	r->cameraX = 2 * x / (m->map.row - 1);
-	r->raydirX = r->dirX + r->planeX * r->cameraX;
-	r->raydirY = r->dirY + r->planeY * r->cameraX;
-	r->mapX = (int)r->posX;
-	r->mapY = (int)r->posY;
-	r->deltadistX = sqrt(1 + (r->raydirY * r->raydirY) / (r->raydirX * r->raydirX));
-	r->deltadistY = sqrt(1 + (r->raydirX * r->raydirX) / (r->raydirY * r->raydirY));
-	r->hit = 0;
-	if (r->raydirX < 0)
+	m->ray.cameraX = 2 * x / (m->map.row - 1);
+	m->ray.raydirX = m->ray.dirX + m->ray.planeX * m->ray.cameraX;
+	m->ray.raydirY = m->ray.dirY + m->ray.planeY * m->ray.cameraX;
+	m->ray.mapX = (int)m->ray.posX;
+	m->ray.mapY = (int)m->ray.posY;
+	m->ray.deltadistX = sqrt(1 + (m->ray.raydirY * m->ray.raydirY) / (m->ray.raydirX * m->ray.raydirX));
+	m->ray.deltadistY = sqrt(1 + (m->ray.raydirX * m->ray.raydirX) / (m->ray.raydirY * m->ray.raydirY));
+	m->ray.hit = 0;
+	if (m->ray.raydirX < 0)
 	{
-		r->stepX = -1;
-		r->sidedistX = (r->posX - r->mapX) * r->deltadistX;
+		m->ray.stepX = -1;
+		m->ray.sidedistX = (m->ray.posX - m->ray.mapX) * m->ray.deltadistX;
 	}
 	else
 	{
-		r->stepX = 1;
-		r->sidedistX = (r->mapX + 1.0 - r->posX) * r->deltadistX;
+		m->ray.stepX = 1;
+		m->ray.sidedistX = (m->ray.mapX + 1.0 - m->ray.posX) * m->ray.deltadistX;
 	}
-	if (r->raydirY < 0)
+	if (m->ray.raydirY < 0)
 	{
-		r->stepY = -1;
-		r->sidedistY = (r->posY - r->mapY) * r->deltadistY;
+		m->ray.stepY = -1;
+		m->ray.sidedistY = (m->ray.posY - m->ray.mapY) * m->ray.deltadistY;
 	}
 	else
 	{
-		r->stepY = 1;
-		r->sidedistY = (r->mapY + 1.0 - r->posY) * r->deltadistY;
+		m->ray.stepY = 1;
+		m->ray.sidedistY = (m->ray.mapY + 1.0 - m->ray.posY) * m->ray.deltadistY;
 	}
 }
 
-void	ray_dda(t_env *m, t_ray *r)
+void	ray_dda(t_env *m)
 {
-	while (r->hit == 0)
+	while (m->ray.hit == 0)
 	{
-		if (r->sidedistX < r->sidedistY)
+		if (m->ray.sidedistX < m->ray.sidedistY)
 		{
-			r->sidedistX += r->deltadistX;
-			r->mapX += r->stepX;
-			r->side = 0;
+			m->ray.sidedistX += m->ray.deltadistX;
+			m->ray.mapX += m->ray.stepX;
+			m->ray.side = 0;
 		}
 		else
 		{
-			r->sidedistY += r->deltadistY;
-			r->mapY += r->stepY;
-			r->side = 1;
+			m->ray.sidedistY += m->ray.deltadistY;
+			m->ray.mapY += m->ray.stepY;
+			m->ray.side = 1;
 		}
-		if (m->map.map[r->mapY][r->mapX] > 0)
-			r->hit = 1;
+		if (m->map.map[m->ray.mapY][m->ray.mapX] > 0)
+			m->ray.hit = 1;
 	}
 }
 
-void		raycasting(t_env *m, t_ray *r)
+void		raycasting(t_env *m)
 {
 	int		x;
 	int		start;
@@ -143,16 +142,16 @@ void		raycasting(t_env *m, t_ray *r)
 	x = -1;
 	while (++x < WINDOW)
 	{
-		wolf(m, r, x);
-		raycasting(m, r);
-		if (r->side == 0)
-			r->perpwalldist = (r->mapX - r->posX + (1 - r->stepX) / 2) / r->raydirX;
+		wolf(m, x);
+		ray_dda(m);
+		if (m->ray.side == 0)
+			m->ray.perpwalldist = (m->ray.mapX - m->ray.posX + (1 - m->ray.stepX) / 2) / m->ray.raydirX;
 		else
-			r->perpwalldist = (r->mapY - r->posY + (1 - r->stepY) / 2) / r->raydirY;
+			m->ray.perpwalldist = (m->ray.mapY - m->ray.posY + (1 - m->ray.stepY) / 2) / m->ray.raydirY;
 
-		r->lineheight = (int)(WINDOW / r->perpwalldist);
-		start = -(r->lineheight) / 2 + WINDOW / 2;
-		end = r->lineheight / 2 + WINDOW / 2;
+		m->ray.lineheight = (int)(WINDOW / m->ray.perpwalldist);
+		start = -(m->ray.lineheight) / 2 + WINDOW / 2;
+		end = m->ray.lineheight / 2 + WINDOW / 2;
 		if (start < 0)
 			start = 0;
 		if (end >= WINDOW)

@@ -23,11 +23,15 @@ int		main(int ac, char **av)
 	{
 		map_size(&m, av[1]);
 		map_read(&m, av[1]);
+		m.mlx_ptr = mlx_init();
+		m.win_ptr = mlx_new_window(m.mlx_ptr, WINDOW, WINDOW, "WOLF");
 		init_mlx(&m);
 		init_env(&m);
 		init_texture(&m);
-		raycasting(&m, &r);
+		raycasting(&m);
 		mlx_put_image_to_window(m.mlx_ptr, m.win_ptr, m.image, 0, 0);
+		//mlx_hook(m.win_ptr, 2, 0, keyfunction, &m);
+		//mlx_hook(m->win_ptr, 17, 0, keyfunctions, m);
 		mlx_loop(m.mlx_ptr);
 	}
 	return (0);

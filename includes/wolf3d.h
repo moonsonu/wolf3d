@@ -106,6 +106,13 @@ void			map_size(t_env *m, char *av);
 ** wolf.c
 */
 void			plot(t_env *m, int x, int start, int end);
-void			wolf(t_env *m, t_ray *r, int x);
-void			raycasting(t_env *m, t_ray *r);
+void			wolf(t_env *m, int x);
+void			raycasting(t_env *m);
+
+/*
+** hooks.c
+*/
+
+void			key_move(int key, t_env *m);
+int				keyfunction(int key, t_env *m);
 #endif
