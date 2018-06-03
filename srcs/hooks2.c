@@ -2,25 +2,26 @@
 
 void	key_move(int key, t_env *m)
 {
+	//123 left 124 right 125 down 126up
 	double	tmpdirX;
 	double	tmpplaneX;
 
 	if (key == 124)
 	{
 		tmpdirX = m->ray.dirX;
-		m->ray.dirX = tmpdirX * cos(-0.1) - m->ray.dirY * sin(-0.1);
+		m->ray.dirX = m->ray.dirX * cos(-0.1) - m->ray.dirY * sin(-0.1);
 		m->ray.dirY = tmpdirX * sin(-0.1) + m->ray.dirY * cos(-0.1);
 		tmpplaneX = m->ray.planeX;
-		m->ray.planeX = tmpplaneX * cos(-0.1) - m->ray.planeY * sin(-0.1);
+		m->ray.planeX = m->ray.planeX * cos(-0.1) - m->ray.planeY * sin(-0.1);
 		m->ray.planeY = tmpplaneX * sin(-0.1) + m->ray.planeY * cos(-0.1);
 	}
 	if (key == 123)
 	{
 		tmpdirX = m->ray.dirX;
-		m->ray.dirX = tmpdirX * cos(0.1) - m->ray.dirY * sin(0.1);
+		m->ray.dirX = m->ray.dirX * cos(0.1) - m->ray.dirY * sin(0.1);
 		m->ray.dirY = tmpdirX * sin(0.1) + m->ray.dirY * cos(0.1);
 		tmpplaneX = m->ray.planeX;
-		m->ray.planeX = tmpplaneX * cos(0.1) - m->ray.planeY * sin(0.1);
+		m->ray.planeX = m->ray.planeX * cos(0.1) - m->ray.planeY * sin(0.1);
 		m->ray.planeY = tmpplaneX * sin(0.1) + m->ray.planeY * cos(0.1);
 	}
 	if (key == 126)

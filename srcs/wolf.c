@@ -6,41 +6,15 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:00:08 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/01 22:31:15 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/02 21:19:59 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
-void		plot(t_env *m, int x, int start, int end)
+void		plot_floor(t_env *m, int x, int end)
 {
-	int		d;
-	int		textnum;
-	int		texX;
-	int		texY;
-	int		color;
 	int		y;
 
-	textnum = m->map.map[m->ray.mapX][m->ray.mapY];
-	if (m->ray.side == 0)
-		m->ray.wallX = m->ray.posX + m->ray.perpwalldist * m->ray.raydirY;
-	else
-		m->ray.wallX = m->ray.posX + m->ray.perpwalldist * m->ray.raydirX;
-	m->ray.wallX -= floor((m->ray.wallX));
-	texX = (int)(m->ray.wallX * TEXTWD);
-	if (m->ray.side == 0 && m->ray.raydirX > 0)
-		texX = TEXTWD - texX - 1;
-	if (m->ray.side == 1 && m->ray.raydirY < 0)
-		texX = TEXTWD - texX - 1;
-	while (start < end)
-	{
-		d = start * 256 - WINDOW * 128 + m->ray.lineheight * 128;
-		texY = ((d * TEXTHT) / m->ray.lineheight) / 256;
-		color = m->texture[textnum][TEXTHT * texY + texX];
-		if (m->ray.side == 1)
-			color = (color >> 1) & 8355711;
-		m->data[x + (start++ * m->size) / 4] = color;
-	}
 	if (!m->ray.side && m->ray.raydirX > 0)
 	{
 		m->ray.floorX = m->ray.mapX;
@@ -64,18 +38,49 @@ void		plot(t_env *m, int x, int start, int end)
 	m->ray.distwall = m->ray.perpwalldist;
 	m->ray.distpos = 0;
 	y = end + 1;
-	while (++y < WINDOW)
+	while (y++ < WINDOW)
 	{
 		m->ray.distcurr = WINDOW / (2.0 * y - WINDOW);
 		m->ray.weight = (m->ray.distcurr - m->ray.distpos) / (m->ray.distwall - m->ray.distpos);
 		m->ray.currfloorX = m->ray.weight * m->ray.floorX + (1.0 - m->ray.weight) * m->ray.posX;
 		m->ray.currfloorY = m->ray.weight * m->ray.floorY + (1.0 - m->ray.weight) * m->ray.posY;
-		m->ray.floortextX = (int)(m->ray.currfloorX * TEXTHT) % TEXTHT;
+		m->ray.floortextX = (int)(m->ray.currfloorX * TEXTWD) % TEXTWD;
 		m->ray.floortextY = (int)(m->ray.currfloorY * TEXTHT) % TEXTHT;
-		m->data[x + (y * m->size) / 4] = (m->texture[4]
+		m->data[x + (y * m->size) / 4] = (m->texture[3]
 		[TEXTHT * m->ray.floortextY + m->ray.floortextX] >> 1) & 8355711;
 		m->data[x + ((WINDOW - y) * m->size) / 4] =
-		m->texture[5][TEXTHT * m->ray.floortextY + m->ray.floortextX];
+		m->texture[6][TEXTHT * m->ray.floortextY + m->ray.floortextX];
+	}
+}
+
+void		plot(t_env *m, int x, int start, int end)
+{
+	int		d;
+	int		textnum;
+	int		texX;
+	int		texY;
+	int		color;
+
+	textnum = m->map.map[m->ray.mapX][m->ray.mapY];
+	printf("textnum[%d]\n", textnum);
+	if (m->ray.side == 0)
+		m->ray.wallX = m->ray.posY + m->ray.perpwalldist * m->ray.raydirY;
+	else
+		m->ray.wallX = m->ray.posX + m->ray.perpwalldist * m->ray.raydirX;
+	m->ray.wallX -= floor((m->ray.wallX));
+	texX = (int)(m->ray.wallX * TEXTWD);
+	if (m->ray.side == 0 && m->ray.raydirX > 0)
+		texX = TEXTWD - texX - 1;
+	if (m->ray.side == 1 && m->ray.raydirY < 0)
+		texX = TEXTWD - texX - 1;
+	while (start < end)
+	{
+		d = start * 256 - WINDOW * 128 + m->ray.lineheight * 128;
+		texY = ((d * TEXTHT) / m->ray.lineheight) / 256;
+		color = m->texture[textnum][TEXTHT * texY + texX];
+		if (m->ray.side == 1)
+			color = (color >> 1) & 8355711;
+		m->data[x + (start++ * m->size) / 4] = color;
 	}
 }
 
@@ -138,7 +143,6 @@ void		raycasting(t_env *m)
 	int		start;
 	int		end;
 
-	ft_bzero(m->data, WINDOW * WINDOW * 4);
 	x = -1;
 	while (++x < WINDOW)
 	{
@@ -157,5 +161,6 @@ void		raycasting(t_env *m)
 		if (end >= WINDOW)
 			end = WINDOW - 1;
 		plot(m, x, start, end);
+		plot_floor(m, x, end);
 	}
 }
