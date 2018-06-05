@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:58:17 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/04 17:49:54 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/04 22:14:12 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	init_texture(t_env *m)
 	int		x;
 	int		y;
 
-	x = -1;
-	while (++x < TEXTWD)
+	y = -1;
+	while (++y < TEXTHT)
 	{
-		y = -1;
-		while (++y < TEXTHT)
+		x = -1;
+		while (++x < TEXTWD)
 		{
 			//m->xorcolor = (x * 256 / TEXTHT) ^ (y * 256 / TEXTHT);
 			//m->ycolor = y * 256 / TEXTHT;

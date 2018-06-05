@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/04 19:53:42 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/04 21:55:27 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # define WINDOW 1000
 # define TEXTWD 64
 # define TEXTHT 64
-//# define MAPWD 24
-//# define MAPHT 24
 
 typedef struct	s_ray
 {

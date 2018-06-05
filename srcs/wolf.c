@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:00:08 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/04 20:26:26 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/04 22:14:24 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void		raycasting(t_env *m)
 	int		x;
 	int		y;
 
+	ft_bzero(m->data, WINDOW * WINDOW * 4);
 	x = -1;
 	while (++x < WINDOW)
 	{
@@ -181,7 +182,7 @@ void		raycasting(t_env *m)
 		{
 			m->ray.d = y * 256 - WINDOW * 128 + m->ray.lineheight * 128;
 			m->ray.texY = ((m->ray.d * TEXTHT) / m->ray.lineheight) / 256;
-			m->ray.color = m->texture[0][TEXTWD * m->ray.texY + m->ray.texX];
+			m->ray.color = m->texture[0][(int)(TEXTWD * m->ray.texY + m->ray.texX)];
 			if (m->ray.side == 1)
 				m->ray.color = (m->ray.color >> 1) & 8355711;
 			m->data[y * ((int)WINDOW) + x] = m->ray.color;
@@ -217,12 +218,12 @@ void		raycasting(t_env *m)
 			m->ray.weight = (m->ray.distcurr - m->ray.distpos) / (m->ray.distwall - m->ray.distpos);
 			m->ray.currfloorX = m->ray.weight * m->ray.floorX + (1.0 - m->ray.weight) * m->ray.posX;
 			m->ray.currfloorY = m->ray.weight * m->ray.floorY + (1.0 - m->ray.weight) * m->ray.posY;
-			m->ray.floortextX = (int)(m->ray.currfloorX * TEXTWD) % TEXTWD;
-			m->ray.floortextY = (int)(m->ray.currfloorY * TEXTHT) % TEXTHT;
+			m->ray.floortextX = (int)(m->ray.currfloorX * TEXTWD) % (int)TEXTWD;
+			m->ray.floortextY = (int)(m->ray.currfloorY * TEXTHT) % (int)TEXTHT;
 			m->data[y * (int)WINDOW + x] = (m->texture[1]
-					[TEXTHT * m->ray.floortextY + m->ray.floortextX] >> 1) & 8355711;
+					[(int)(TEXTHT * m->ray.floortextY + m->ray.floortextX)] >> 1) & 8355711;
 			m->data[(int)(WINDOW - y) * WINDOW + x] =
-				m->texture[2][TEXTHT * m->ray.floortextY + m->ray.floortextX];
+				m->texture[2][(int)(TEXTHT * m->ray.floortextY + m->ray.floortextX)];
 		}
 		//plot_floor(m, x, end);
 	}
