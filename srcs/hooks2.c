@@ -26,16 +26,16 @@ void	key_move(int key, t_env *m)
 	}
 	if (key == 126)
 	{
-		if (!m->map.map[(int)(m->ray.posX + m->ray.dirX * 0.1)][(int)m->ray.posY])
+		if (!m->map.map[[(int)m->ray.posY](int)(m->ray.posX + m->ray.dirX * 0.1)])
 			m->ray.posX += m->ray.dirX * 0.1;
-		if (!m->map.map[(int)m->ray.posX][(int)(m->ray.posY + m->ray.dirY * 0.1)])
+		if (!m->map.map[(int)(m->ray.posY + m->ray.dirY * 0.1)][(int)m->ray.posX])
 			m->ray.posY += m->ray.dirY * 0.1;
 	}
 	if (key == 125)
 	{
-		if (!m->map.map[(int)(m->ray.posX - m->ray.dirX * 0.1)][(int)m->ray.posY])
+		if (!m->map.map[(int)m->ray.posY][(int)(m->ray.posX - m->ray.dirX * 0.1)])
 			m->ray.posX -= m->ray.dirX * 0.1;
-		if (!m->map.map[(int)m->ray.posX][(int)(m->ray.posY - m->ray.dirY * 0.1)])
+		if (!m->map.map[(int)(m->ray.posY - m->ray.dirY * 0.1)][(int)m->ray.posX])
 			m->ray.posY -= m->ray.dirY * 0.1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:58:17 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/01 22:31:13 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/04 17:49:54 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ void	init_mlx(t_env *m)
 void	init_env(t_env *m)
 {
 	int		i;
-	m->ray.posX = 2;
-	m->ray.posY = 1;
+	m->ray.posX = 10;
+	m->ray.posY = 10;
 	m->ray.dirX = -1;
 	m->ray.dirY = 0;
 	m->ray.planeX = 0;
 	m->ray.planeY = 0.66;
 	i = -1;
-	while (++i < 8)
-		m->texture[i] = malloc(sizeof(int) * 64);
+	while (++i < 4)
+		m->texture[i] = malloc(sizeof((int)TEXTHT * TEXTWD));
 }
 
 void	init_texture(t_env *m)
@@ -45,17 +45,13 @@ void	init_texture(t_env *m)
 		y = -1;
 		while (++y < TEXTHT)
 		{
-			m->xorcolor = (x * 256 / TEXTHT) ^ (y * 256 / TEXTHT);
-			m->ycolor = y * 256 / TEXTHT;
-			m->xycolor = y * 128 / TEXTHT + x * 128 / TEXTWD;
-			m->texture[0][TEXTWD * y + x] = (m->xorcolor + 256 * m->xorcolor + 65536 * m->xorcolor);
-			m->texture[1][TEXTWD * y + x] = (256 * m->xorcolor);
-			m->texture[2][TEXTWD * y + x] = (m->xorcolor + 128 * m->xorcolor + 32768 * m->xorcolor);
-			m->texture[3][TEXTWD * y + x] = (65536 * m->xorcolor);
-			m->texture[4][TEXTWD * y + x] = (m->xorcolor + 64 * m->xorcolor + 16384 * m->xorcolor);
-			m->texture[5][TEXTWD * y + x] = (m->xorcolor + 64 * m->xorcolor + 65536 * m->xorcolor);
-			m->texture[6][TEXTWD * y + x] = 65536 * m->ycolor;
-			m->texture[7][TEXTWD * y + x] = 128 + 256 * 128 + 65536 * 128;
+			//m->xorcolor = (x * 256 / TEXTHT) ^ (y * 256 / TEXTHT);
+			//m->ycolor = y * 256 / TEXTHT;
+			//m->xycolor = y * 128 / TEXTHT + x * 128 / TEXTWD;
+			m->texture[0][TEXTWD * y + x] = 0xFFFFFF;
+			m->texture[1][TEXTWD * y + x] = 0x32FDE5;
+			m->texture[2][TEXTWD * y + x] = 0x800000;
+			m->texture[3][TEXTWD * y + x] = 0xABC335;
 		}
 	}
 }
