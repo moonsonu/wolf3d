@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 16:39:24 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/05 16:56:30 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/05 21:45:01 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	plot_floor(t_env *m, int x)
 			(1.0 - m->ray.weight) * m->ray.posY;
 		m->ray.floortextX = (int)(m->ray.currfloorX * TEXTWD) % (int)TEXTWD;
 		m->ray.floortextY = (int)(m->ray.currfloorY * TEXTHT) % (int)TEXTHT;
-		m->data[y * (int)WINDOW + x] = ((m->texture[2][(int)(TEXTHT *
+		m->data[y * (int)WINDOW + x] = ((m->texture[0][(int)(TEXTHT *
 						m->ray.floortextY + m->ray.floortextX)]) >> 1)
 			& 8355711;
 		m->data[(int)(WINDOW - y) * WINDOW + x] = m->texture[3][(int)(TEXTHT
@@ -54,7 +54,7 @@ void	plot_wall(t_env *m, int x)
 	{
 		m->ray.d = y * 256 - WINDOW * 128 + m->ray.lineheight * 128;
 		m->ray.texY = ((m->ray.d * TEXTHT) / m->ray.lineheight) / 256;
-		m->ray.color = m->texture[0][(int)(TEXTWD * m->ray.texY +
+		m->ray.color = m->texture[m->ray.textnum][(int)(TEXTWD * m->ray.texY +
 				m->ray.texX)];
 		if (m->ray.side == 1)
 			m->ray.color = (m->ray.color >> 1) & 8355711;

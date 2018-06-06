@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:00:08 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/05 17:14:15 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/05 21:41:10 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ void	ray_dda(t_env *m)
 			m->ray.mapY += m->ray.stepY;
 			m->ray.side = 1;
 		}
-		if (m->map.map[m->ray.mapY][m->ray.mapX] > 0)
+		if (m->map[m->ray.mapY][m->ray.mapX].type > 0)
+		{
 			m->ray.hit = 1;
+			m->ray.textnum = m->map[m->ray.mapY][m->ray.mapX].type;
+		}
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/05 16:53:30 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/05 21:36:58 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,18 @@ typedef struct	s_ray
 	int			start;
 	int			end;
 	int			d;
+	int			textnum;
 }				t_ray;
 
 typedef struct	s_map
 {
-	int			**map;
-	int			row;
-	int			col;
+	int			type;
 }				t_map;
 
 typedef struct	s_env
 {
 	t_ray		ray;
-	t_map		map;
+	t_map		**map;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*image;
@@ -83,9 +82,8 @@ typedef struct	s_env
 	int			size;
 	int			endian;
 	int			*texture[4];
-	int			xorcolor;
-	int			ycolor;
-	int			xycolor;
+	int			map_maxx;
+	int			map_maxy;
 }				t_env;
 
 /*

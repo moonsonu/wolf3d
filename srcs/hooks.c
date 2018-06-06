@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 17:09:43 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/05 17:23:12 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/05 21:45:24 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,20 @@ void	key_updown(int key, t_env *m)
 {
 	if (key == 126)
 	{
-		if (!m->map.map[(int)m->ray.posY][(int)(m->ray.posX +
-					m->ray.dirX * 0.1)])
+		if (!m->map[(int)m->ray.posY][(int)(m->ray.posX +
+					m->ray.dirX * 0.1)].type)
 			m->ray.posX += m->ray.dirX * 0.1;
-		if (!m->map.map[(int)(m->ray.posY + m->ray.dirY * 0.1)]
-				[(int)m->ray.posX])
+		if (!m->map[(int)(m->ray.posY + m->ray.dirY * 0.1)]
+				[(int)m->ray.posX].type)
 			m->ray.posY += m->ray.dirY * 0.1;
 	}
 	if (key == 125)
 	{
-		if (!m->map.map[(int)m->ray.posY][(int)(m->ray.posX -
-					m->ray.dirX * 0.1)])
+		if (!m->map[(int)m->ray.posY][(int)(m->ray.posX -
+					m->ray.dirX * 0.1)].type)
 			m->ray.posX -= m->ray.dirX * 0.1;
-		if (!m->map.map[(int)(m->ray.posY - m->ray.dirY * 0.1)]
-				[(int)m->ray.posX])
+		if (!m->map[(int)(m->ray.posY - m->ray.dirY * 0.1)]
+				[(int)m->ray.posX].type)
 			m->ray.posY -= m->ray.dirY * 0.1;
 	}
 }
@@ -67,12 +67,12 @@ int		key_exit(t_env *m)
 		mlx_destroy_image(m->mlx_ptr, m->image);
 	if (m->win_ptr)
 		mlx_destroy_window(m->mlx_ptr, m->win_ptr);
-	if (m->map.map)
+	if (m->map)
 	{
 		i = -1;
-		while (m->map.map[++i])
-			free(m->map.map[i]);
-		free(m->map.map);
+		while (m->map[++i])
+			free(m->map[i]);
+		free(m->map);
 	}
 	if (m->texture[0])
 	{
@@ -80,7 +80,6 @@ int		key_exit(t_env *m)
 		while (++i < 4)
 			free(m->texture[i]);
 	}
-	printf("1\n");
 	exit(0);
 }
 
