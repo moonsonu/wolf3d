@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:57:47 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/04 17:36:58 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/05 17:21:17 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	map_size(t_env *m, char *av)
 	while (get_next_line(fd, &line) > 0)
 	{
 		(m->map.col)++;
-		m->map.row = ft_wdcount(line, ' ') + 1;;
+		m->map.row = ft_wdcount(line, ' ') + 1;
 		ft_strdel(&line);
 	}
 	close(fd);

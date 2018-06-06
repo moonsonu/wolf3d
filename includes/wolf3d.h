@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/04 21:55:27 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/05 16:53:30 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,24 @@ void			map_size(t_env *m, char *av);
 /*
 ** wolf.c
 */
-void			plot(t_env *m, int x, int start, int end);
-void			wolf(t_env *m, int x);
+void			ray_prep(t_env *m, int x);
+void			ray_dda(t_env *m);
+void			ray_wall(t_env *m);
+void			ray_floor(t_env *m);
 void			raycasting(t_env *m);
+
+/*
+** plot.c
+*/
+void			plot_floor(t_env *m, int x);
+void			plot_wall(t_env *m, int x);
 
 /*
 ** hooks.c
 */
 
-void			key_move(int key, t_env *m);
+void			key_leftright(int key, t_env *m);
+void			key_updown(int key, t_env *m);
+int				key_exit(t_env *m);
 int				keyfunction(int key, t_env *m);
 #endif
