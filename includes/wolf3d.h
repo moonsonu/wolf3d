@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/05 21:36:58 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/06 16:22:39 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,38 @@
 # define WINDOW 1000
 # define TEXTWD 64
 # define TEXTHT 64
+
+typedef struct	s_xpm
+{
+	void		*xpm_floor;
+	int			xpm_f_x;
+	int			xpm_f_y;
+	int			*xpm_f_addr;
+	int			xpm_f_b;
+	int			xpm_f_s;
+	int			xpm_f_e;
+	void		*xpm_wall;
+	int			xpm_w_x;
+	int			xpm_w_y;
+	int			*xpm_w_addr;
+	int			xpm_w_b;
+	int			xpm_w_s;
+	int			xpm_w_e;
+	void		*xpm_block;
+	int			xpm_b_x;
+	int			xpm_b_y;
+	int			*xpm_b_addr;
+	int			xpm_b_b;
+	int			xpm_b_s;
+	int			xpm_b_e;
+	void		*xpm_ceiling;
+	int			xpm_c_x;
+	int			xpm_c_y;
+	int			*xpm_c_addr;
+	int			xpm_c_b;
+	int			xpm_c_s;
+	int			xpm_c_e;
+}				t_xpm;
 
 typedef struct	s_ray
 {
@@ -73,6 +105,7 @@ typedef struct	s_map
 typedef struct	s_env
 {
 	t_ray		ray;
+	t_xpm		xpm;
 	t_map		**map;
 	void		*mlx_ptr;
 	void		*win_ptr;
