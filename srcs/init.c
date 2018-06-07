@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:58:17 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/06 18:27:11 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/07 12:13:06 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	init_env(t_env *m)
 	m->ray.dirY = 0;
 	m->ray.planeX = 0;
 	m->ray.planeY = 0.66;
+	m->ray.movespeed = 0.1;
+	m->ray.rotspeed = 0.1;
 	i = -1;
 	while (++i < 4)
 		m->texture[i] = malloc(4 * (TEXTHT * TEXTWD));

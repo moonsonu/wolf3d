@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/06 22:12:01 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/07 15:43:14 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ typedef struct	s_ray
 	int			end;
 	int			d;
 	int			textnum;
+	double		movespeed;
+	double		rotspeed;
 }				t_ray;
 
 typedef struct	s_map
@@ -137,8 +139,8 @@ typedef struct	s_env
 	t_ray		ray;
 	t_xpm		xpm;
 	t_map		**map;
-	t_sprite	*sprite;
-	t_p_spt		spt;
+//	t_sprite	*sprite;
+//	t_p_spt		spt;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*image;

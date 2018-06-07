@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 16:39:24 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/06 22:11:56 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/07 12:13:35 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define VDIV 1
 #define VMOVE 0.0
 
-void	plot_sprite(t_env *m, int x)
+/*void	plot_sprite(t_env *m, int x)
 {
 	int		i;
 	int		stripe;
@@ -66,7 +66,7 @@ void	plot_sprite(t_env *m, int x)
 					if ((color & 0x00FFFFFF) != 0)
 						m->data[y * stripe] = color;
 	}
-}
+}*/
 
 void	plot_floor(t_env *m, int x)
 {
