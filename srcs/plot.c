@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 16:39:24 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/06 15:54:20 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/06 20:42:27 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	plot_floor(t_env *m, int x)
 	while (++y < WINDOW)
 	{
 		m->ray.distcurr = WINDOW / (2.0 * y - WINDOW);
-		m->ray.weight = (m->ray.distcurr - m->ray.distpos) / (m->ray.distwall -
-				m->ray.distpos);
+		m->ray.weight = (m->ray.distcurr - m->ray.distpos) /
+			(m->ray.distwall - m->ray.distpos);
 		m->ray.currfloorX = m->ray.weight * m->ray.floorX +
 			(1.0 - m->ray.weight) * m->ray.posX;
 		m->ray.currfloorY = m->ray.weight * m->ray.floorY +
@@ -44,7 +44,7 @@ void	plot_wall(t_env *m, int x)
 {
 	int		y;
 
-	m->ray.texX = (int)(m->ray.wallX * TEXTWD);
+	m->ray.texX = (int)(m->ray.wallX * (double)TEXTWD);
 	if (m->ray.side == 0 && m->ray.raydirX > 0)
 		m->ray.texX = TEXTWD - m->ray.texX - 1;
 	if (m->ray.side == 1 && m->ray.raydirY < 0)
@@ -54,7 +54,8 @@ void	plot_wall(t_env *m, int x)
 	{
 		m->ray.d = y * 256 - WINDOW * 128 + m->ray.lineheight * 128;
 		m->ray.texY = ((m->ray.d * TEXTHT) / m->ray.lineheight) / 256;
-		m->ray.color = m->texture[m->ray.textnum][(int)(TEXTWD * m->ray.texY + m->ray.texX)];
+		m->ray.color = m->texture[m->ray.textnum][(int)(TEXTWD *
+				m->ray.texY + m->ray.texX)];
 		if (m->ray.side == 1)
 			m->ray.color = (m->ray.color >> 1) & 8355711;
 		m->data[y * ((int)WINDOW) + x] = m->ray.color;

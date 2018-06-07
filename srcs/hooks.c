@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 17:09:43 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/05 21:45:24 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/06 20:33:24 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	key_leftright(int key, t_env *m)
 {
 	double	tmpdir_x;
 	double	tmpplane_x;
-
+	
 	if (key == 124)
 	{
 		tmpdir_x = m->ray.dirX;
@@ -41,20 +41,20 @@ void	key_updown(int key, t_env *m)
 {
 	if (key == 126)
 	{
-		if (!m->map[(int)m->ray.posY][(int)(m->ray.posX +
-					m->ray.dirX * 0.1)].type)
+		if (m->map[(int)m->ray.posY][(int)(m->ray.posX +
+					m->ray.dirX * 0.1)].type == 0)
 			m->ray.posX += m->ray.dirX * 0.1;
-		if (!m->map[(int)(m->ray.posY + m->ray.dirY * 0.1)]
-				[(int)m->ray.posX].type)
+		if (m->map[(int)(m->ray.posY + m->ray.dirY * 0.1)]
+				[(int)m->ray.posX].type == 0)
 			m->ray.posY += m->ray.dirY * 0.1;
 	}
 	if (key == 125)
 	{
-		if (!m->map[(int)m->ray.posY][(int)(m->ray.posX -
-					m->ray.dirX * 0.1)].type)
+		if (m->map[(int)m->ray.posY][(int)(m->ray.posX -
+					m->ray.dirX * 0.1)].type == 0)
 			m->ray.posX -= m->ray.dirX * 0.1;
-		if (!m->map[(int)(m->ray.posY - m->ray.dirY * 0.1)]
-				[(int)m->ray.posX].type)
+		if (m->map[(int)(m->ray.posY - m->ray.dirY * 0.1)]
+				[(int)m->ray.posX].type == 0)
 			m->ray.posY -= m->ray.dirY * 0.1;
 	}
 }

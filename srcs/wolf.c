@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:00:08 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/05 21:41:10 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/06 20:42:56 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ray_prep(t_env *m, int x)
 {
-	m->ray.cameraX = 2 * x / ((double)WINDOW - 1);
+	m->ray.cameraX = 2 * x / (double)WINDOW - 1;
 	m->ray.raydirX = m->ray.dirX + m->ray.planeX * m->ray.cameraX;
 	m->ray.raydirY = m->ray.dirY + m->ray.planeY * m->ray.cameraX;
 	m->ray.mapX = (int)m->ray.posX;
@@ -90,7 +90,7 @@ void	ray_floor(t_env *m)
 		m->ray.floorX = m->ray.mapX + 1.0;
 		m->ray.floorY = m->ray.mapY + m->ray.wallX;
 	}
-	else if (m->ray.side && m->ray.raydirY > 0)
+	else if (m->ray.side == 1 && m->ray.raydirY > 0)
 	{
 		m->ray.floorX = m->ray.mapX + m->ray.wallX;
 		m->ray.floorY = m->ray.mapY;
@@ -106,6 +106,7 @@ void	raycasting(t_env *m)
 {
 	int		x;
 
+	ft_bzero(m->data, WINDOW * WINDOW * 4);
 	x = -1;
 	while (++x < WINDOW)
 	{

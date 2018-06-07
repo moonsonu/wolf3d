@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/06 16:22:39 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/06 18:02:00 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,22 @@ typedef struct	s_map
 	int			type;
 }				t_map;
 
+/*typedef struct	s_sprite;
+{
+	double		x;
+	double		y;
+	int			texture;
+}				t_sprite;*/
+
 typedef struct	s_env
 {
 	t_ray		ray;
 	t_xpm		xpm;
 	t_map		**map;
+//	t_sprite	*sprite;
+//	int			*spriteorder;
+//	double		*spritedistance;
+//	int			spritenumber;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*image;
