@@ -6,11 +6,67 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 16:39:24 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/06 20:42:27 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/06 22:11:56 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+#define UDIV 1
+#define VDIV 1
+#define VMOVE 0.0
+
+void	plot_sprite(t_env *m, int x)
+{
+	int		i;
+	int		stripe;
+	int		y;
+
+	i = -1;
+	m->data[x] = m->ray.perpwalldist;
+	while (++i < m->numsprites)
+	{
+		m->spt.spriteorder[i] = i;
+		m->spt.spritedistance[i] = ((m->ray.posX - m->sprite[i].x) * (m->ray.posX - m->sprite[i].x) + (m->ray.posY - m->sprite[i].y) * (m->ray.posY - m->sprite[i].y));
+	}
+	i = -1;
+	while (++i < m->numsprites)
+	{
+		m->spt.spriteX = m->sprite[m->spt.spriteorder[i]].x - m->ray.posX;
+		m->spt.spriteY = m->sprite[m->spt.spriteorder[i]].y - m->ray.posY;
+		m->spt.transformX = m->spt.invdet * (m->ray.dirY * m->spt.spriteX - m->ray.dirX * m->spt.spriteY);
+		m->spt.transformY = m->spt.invdet * (-(m->ray.planeY) * m->spt.spriteX + m->ray.planeX * m->spt.spriteY);
+		m->spt.spritescreenX = int((WINDOW / 2) * (1 + m->spt.transformX / m->spt.transformY));
+		m->spt.vmovescreen = int(VMOVE / m->spt.transformY);
+		m->spt.spriteheight = fabs(int(WINDOW / m->spt.transformY)) / VDIV;
+		m->spt.drawstartY = -(m->spt.spriteheight) / 2 + WINDOW / 2 + m->spt.vmovescreen;
+		if (m->spt.drawstartY < 0)
+			m->spt.drawstartY = 0;
+		m->spt.drawendY = m->spt.spriteheight / 2 + WINDOW / 2 + m->spt.vmovescreen;
+		if (m->spt.drawendY >= WINDOW)
+			m->spt.drawendY = WINDOW - 1;
+		m->spt.spritewidth = fabs(int(WINDOW / m->spt.transformY)) / UDIV;
+		m->spt.drawstartX = -(m->spt.spritewidth) / 2 + m->spt.spritescreenX;
+		if (m->spt.drawstartX < 0)
+			m->spt.drawstartX = 0;
+		m->spt.drawendX = m->spt.spritewidth / 2 + m->spt.spritescreenX;
+		if (m->spt.drawendX >= WINDOW)
+			m->spt.drawendX = WINDOW - 1;
+		stripe = m->spt.drawstartX - 1;
+		while (++stripe < m->spt.drawendX)
+		{
+			m->spt.s_texX = int(256 * (stripe - (m->spt.spritewidth / 2 + m->spt.spritescreenX)) * TEXTWD / m->spt.spritewidth) / 256;
+			if (m->spt.transformY > 0 && stripe > 0 && stripe < WINDOW && m->spt.transformY < m->data[stripe])
+			{
+				y = m->spt.drawstartY;
+				while (y++ < m->spt.drawendY)
+				{
+					m->spt.s_d = (y - m->spt.vmovescreen) * 256 - h * 128 + m->spt.spriteheight * 128;
+					m->spt.s_texY = ((m->spt.s_d * TEXTHT) / m->spt.spriteheight) / 256;
+					m->ray.color = m->texture[m->sprite[m->spt.spriteorder[i]].texture][TEXTWD * m->spt.s_texY + m->spt.s_texX];
+					if ((color & 0x00FFFFFF) != 0)
+						m->data[y * stripe] = color;
+	}
+}
 
 void	plot_floor(t_env *m, int x)
 {

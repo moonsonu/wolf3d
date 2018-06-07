@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:00:08 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/06 20:42:56 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/06 22:07:24 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ void	raycasting(t_env *m)
 		plot_wall(m, x);
 		ray_floor(m);
 		plot_floor(m, x);
+		plot_sprite(m, x);
 	}
 }
