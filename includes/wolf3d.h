@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/07 15:43:14 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/08 19:27:33 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ typedef struct	s_xpm
 	int			xpm_c_b;
 	int			xpm_c_s;
 	int			xpm_c_e;
+	void		*xpm_hand;
+	int			xpm_h_x;
+	int			xpm_h_y;
+	int			*xpm_h_addr;
+	int			xpm_h_b;
+	int			xpm_h_s;
+	int			xpm_h_e;
 }				t_xpm;
 
 typedef struct	s_ray
@@ -148,7 +155,7 @@ typedef struct	s_env
 	int			bbp;
 	int			size;
 	int			endian;
-	int			*texture[4];
+	int			*texture[5];
 	int			map_maxx;
 	int			map_maxy;
 }				t_env;
@@ -160,6 +167,7 @@ typedef struct	s_env
 /*
 ** init.c
 */
+void			hand(t_env *m);
 void			init_mlx(t_env *m);
 void			init_env(t_env *m);
 void			init_texture(t_env *m);
