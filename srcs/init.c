@@ -46,7 +46,7 @@ void	init_mlx(t_env *m)
 	m->xpm.xpm_b_addr = (int*)mlx_get_data_addr(m->xpm.xpm_block, &(m->xpm.xpm_b_b), &(m->xpm.xpm_b_s), &(m->xpm.xpm_b_e));
 	m->xpm.xpm_ceiling = mlx_xpm_file_to_image(m->mlx_ptr, "./xpm/cc.xpm", &(m->xpm.xpm_c_x), &(m->xpm.xpm_c_y));
 	m->xpm.xpm_c_addr = (int*)mlx_get_data_addr(m->xpm.xpm_ceiling, &(m->xpm.xpm_c_b), &(m->xpm.xpm_c_s), &(m->xpm.xpm_c_e));
-	m->xpm.xpm_hand = mlx_xpm_file_to_image(m->mlx_ptr, "./xpm/car.xpm", &(m->xpm.xpm_h_x), &(m->xpm.xpm_h_y));
+	m->xpm.xpm_hand = mlx_xpm_file_to_image(m->mlx_ptr, "./xpm/ccar.xpm", &(m->xpm.xpm_h_x), &(m->xpm.xpm_h_y));
 	m->xpm.xpm_h_addr = (int*)mlx_get_data_addr(m->xpm.xpm_hand, &(m->xpm.xpm_h_b), &(m->xpm.xpm_h_s), &(m->xpm.xpm_h_e));
 }
 
