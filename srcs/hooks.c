@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 17:09:43 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/08 19:02:08 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/09 15:51:13 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,6 @@ int		keyfunction(int key, t_env *m)
 	(key == 125 || key == 126 || key == 1) ? key_updown(key, m) : 0;
 	raycasting(m);
 	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->image, 0, 0);
-	hand(m);
+	plot_car(m);
 	return (0);
 }

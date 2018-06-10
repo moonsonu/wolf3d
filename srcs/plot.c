@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 16:39:24 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/08 20:40:36 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/09 21:25:45 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,27 @@
 	}
 }*/
 
+void	plot_car(t_env *m)
+{
+	t_env	h;
+	int		x;
+	int		y;
+	int		i;
+
+	i = 0;
+	y = -1;
+	//ft_bzero(&h, sizeof(h));
+	h.image = mlx_new_image(m->mlx_ptr, (m->xpm.xpm_h_x), (m->xpm.xpm_h_y));
+	h.data = (int*)mlx_get_data_addr(h.image, &m->bbp, &m->size, &m->endian);
+	while (++y < m->xpm.xpm_h_y)
+	{
+		x = -1;
+		while (++x < m->xpm.xpm_h_x)
+			h.data[(y * m->xpm.xpm_h_x) + x] = m->texture[4][i++];
+	}
+	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, h.image, 0, 0);
+}
+
 void	plot_floor(t_env *m, int x)
 {
 	int		y;
@@ -91,10 +112,25 @@ void	plot_floor(t_env *m, int x)
 		m->data[y * (int)WINDOW + x] = ((m->texture[0][(int)(TEXTHT *
 						m->ray.floortextY + m->ray.floortextX)]) >> 1)
 			& 8355711;
-		m->data[(int)(WINDOW - y) * WINDOW + x] = m->texture[3][(int)(TEXTHT
-				* m->ray.floortextY + m->ray.floortextX)];
+	/*	m->data[(int)(WINDOW - y) * WINDOW + x] = m->texture[3][(int)(TEXTHT
+				* m->ray.floortextY + m->ray.floortextX)];*/
 	}
 }
+
+void	plot_sky(t_env *m, int x)
+{
+	int		y;
+
+	y = -1;
+	//m->ray.texX = (int)(m->ray.wallX * (double)TEXTWD);
+	while (++y < 500)
+	{
+		m->ray.d = (y * 256 - WINDOW * 128 + m->ray.lineheight * 128);
+		m->ray.texY = ((m->ray.d * TEXTHT) / m->ray.lineheight) / 256;
+		m->data[y * ((int)WINDOW) + x] = m->texture[3][(int)(WINDOW * y + x)];
+	}
+}
+
 
 void	plot_wall(t_env *m, int x)
 {

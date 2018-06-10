@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/08 19:27:33 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/09 21:25:50 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,6 @@ typedef struct	s_env
 /*
 ** init.c
 */
-void			hand(t_env *m);
 void			init_mlx(t_env *m);
 void			init_env(t_env *m);
 void			init_texture(t_env *m);
@@ -191,7 +190,9 @@ void			raycasting(t_env *m);
 /*
 ** plot.c
 */
+void			plot_car(t_env *m);
 void			plot_floor(t_env *m, int x);
+void			plot_sky(t_env *m, int x);
 void			plot_wall(t_env *m, int x);
 
 /*

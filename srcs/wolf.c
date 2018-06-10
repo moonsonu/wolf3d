@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:00:08 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/08 18:49:44 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/06/09 21:25:46 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	raycasting(t_env *m)
 		ray_prep(m, x);
 		ray_dda(m);
 		ray_wall(m);
+		plot_sky(m, x);
 		plot_wall(m, x);
 		ray_floor(m);
 		plot_floor(m, x);
