@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:58:17 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/09 19:39:43 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/12 17:29:19 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	init_mlx(t_env *m)
 {
-	//m->mlx_ptr = mlx_init();
-	//m->win_ptr = mlx_new_window(m->mlx_ptr, WINDOW, WINDOW, "WOLF");
+	m->mlx_ptr = mlx_init();
+	m->win_ptr = mlx_new_window(m->mlx_ptr, WINDOW, WINDOW, "WOLF");
 	m->image = mlx_new_image(m->mlx_ptr, WINDOW, WINDOW);
 	m->data = (int*)mlx_get_data_addr(m->image, &m->bbp, &m->size, &m->endian);
 	m->xpm.xpm_floor = mlx_xpm_file_to_image(m->mlx_ptr, "./xpm/ground.xpm", &(m->xpm.xpm_f_x), &(m->xpm.xpm_f_y));
@@ -34,8 +34,8 @@ void	init_env(t_env *m)
 {
 	int		i;
 
-	m->ray.posX = 10;
-	m->ray.posY = 10;
+	m->ray.posX = 2;
+	m->ray.posY = 2;
 	m->ray.dirX = -1;
 	m->ray.dirY = 0;
 	m->ray.planeX = 0;

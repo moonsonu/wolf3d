@@ -6,11 +6,36 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:57:47 by ksonu             #+#    #+#             */
-/*   Updated: 2018/06/06 22:11:58 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/12 17:15:33 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+int		validation(t_env *m)
+{
+	int		i;
+	int		j;
+	int		e;
+
+	i = -1;
+	while (++i < m->map_maxy)
+	{
+		j = -1;
+		while (++j < m->map_maxx)
+		{
+			if (m->map[i][j].type < 0 || m->map[i][j].type > 9)
+				e = 2;
+			else if (m->map[0][j].type != 1 || m->map[m->map_maxy - 1][j].type != 1)
+				e = 2;
+			else if (m->map[i][0].type != 1 || m->map[i][m->map_maxx - 1].type != 1)
+				e = 2;
+			else
+				e = 0;
+		}
+	}
+	return (error(e));
+}
 
 void	map_malloc(t_env *m)
 {
@@ -46,6 +71,7 @@ void	map_read(t_env *m, char *av)
 		}
 	}
 	close(fd);
+	validation(m);
 }
 
 void	map_size(t_env *m, char *av)
@@ -61,8 +87,9 @@ void	map_size(t_env *m, char *av)
 	while (get_next_line(fd, &line) > 0)
 	{
 		(m->map_maxy)++;
-		m->map_maxx= ft_wdcount(line, ' ') + 1;
+		m->map_maxx = ft_wdcount(line, ' ') + 1;
 		ft_strdel(&line);
 	}
+	(m->map_maxx = m->map_maxy) ? 0 : error(2);
 	close(fd);
 }
