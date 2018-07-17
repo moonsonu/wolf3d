@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:20:10 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/12 17:29:10 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/16 17:10:41 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		main(int ac, char **av)
 	init_mlx(&m);
 	init_env(&m);
 	init_texture(&m);
+	intro(&m);
 	raycasting(&m);
 	mlx_hook(m.win_ptr, 2, 0, keyfunction, &m);
 	mlx_hook(m.win_ptr, 17, 0, key_exit, &m);

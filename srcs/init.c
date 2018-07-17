@@ -6,11 +6,33 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:58:17 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/12 17:29:19 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/16 17:36:24 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+void	intro(t_env *m)
+{
+	t_env intro;
+	int		x;
+	int		y;
+	int		i;
+
+	i = 0;
+	y = -1;
+	mlx_hook(m->win_ptr, 2, 0, keyfunction, m);
+	intro.image = mlx_new_image(m->mlx_ptr, (m->xpm.xpm_i_x), (m->xpm.xpm_i_y));
+	intro.data = (int*)mlx_get_data_addr(intro.image, &m->bbp, &m->size, &m->endian);
+	while (++y < m->xpm.xpm_i_y)
+	{
+		x = -1;
+		while (++x < m->xpm.xpm_i_x)
+			intro.data[(y * m->xpm.xpm_i_x) + x] = m->texture[5][i++];
+	}
+	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, intro.image, 0, 0);
+	mlx_loop(m->mlx_ptr);
+}
 
 void	init_mlx(t_env *m)
 {
@@ -28,6 +50,8 @@ void	init_mlx(t_env *m)
 	m->xpm.xpm_c_addr = (int*)mlx_get_data_addr(m->xpm.xpm_ceiling, &(m->xpm.xpm_c_b), &(m->xpm.xpm_c_s), &(m->xpm.xpm_c_e));
 	m->xpm.xpm_hand = mlx_xpm_file_to_image(m->mlx_ptr, "./xpm/ccar.xpm", &(m->xpm.xpm_h_x), &(m->xpm.xpm_h_y));
 	m->xpm.xpm_h_addr = (int*)mlx_get_data_addr(m->xpm.xpm_hand, &(m->xpm.xpm_h_b), &(m->xpm.xpm_h_s), &(m->xpm.xpm_h_e));
+	m->xpm.xpm_intro = mlx_xpm_file_to_image(m->mlx_ptr, "./xpm/background.xpm", &(m->xpm.xpm_i_x), &(m->xpm.xpm_i_y));
+	m->xpm.xpm_i_addr = (int*)mlx_get_data_addr(m->xpm.xpm_intro, &(m->xpm.xpm_i_b), &(m->xpm.xpm_i_s), &(m->xpm.xpm_i_e));
 }
 
 void	init_env(t_env *m)
@@ -47,6 +71,7 @@ void	init_env(t_env *m)
 		m->texture[i] = malloc(4 * (TEXTHT * TEXTWD));
 	m->texture[3] = malloc(4 * (m->xpm.xpm_c_x * m->xpm.xpm_c_y));
 	m->texture[4] = malloc(4 * (m->xpm.xpm_h_x * m->xpm.xpm_h_y));
+	m->texture[5] = malloc(4 * (m->xpm.xpm_i_x * m->xpm.xpm_i_y));
 }
 
 void	init_texture(t_env *m)
@@ -79,5 +104,12 @@ void	init_texture(t_env *m)
 		x = -1;
 		while (++x < m->xpm.xpm_h_x)
 			m->texture[4][m->xpm.xpm_h_x * y + x] = m->xpm.xpm_h_addr[m->xpm.xpm_h_x * y + x];
+	}
+	y = -1;
+	while (++y < m->xpm.xpm_i_y)
+	{
+		x = -1;
+		while (++x < m->xpm.xpm_i_x)
+			m->texture[5][m->xpm.xpm_i_x * y + x] = m->xpm.xpm_i_addr[m->xpm.xpm_i_x * y + x];
 	}
 }
