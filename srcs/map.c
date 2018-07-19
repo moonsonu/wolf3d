@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:57:47 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/12 17:15:33 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/19 10:44:23 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ int		validation(t_env *m)
 		{
 			if (m->map[i][j].type < 0 || m->map[i][j].type > 9)
 				e = 2;
-			else if (m->map[0][j].type != 1 || m->map[m->map_maxy - 1][j].type != 1)
+			else if (m->map[0][j].type != 1 ||
+					m->map[m->map_maxy - 1][j].type != 1)
 				e = 2;
-			else if (m->map[i][0].type != 1 || m->map[i][m->map_maxx - 1].type != 1)
+			else if (m->map[i][0].type != 1 ||
+					m->map[i][m->map_maxx - 1].type != 1)
 				e = 2;
 			else
 				e = 0;

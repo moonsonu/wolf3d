@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/16 17:35:26 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/19 11:36:27 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,15 +170,19 @@ typedef struct	s_env
 /*
 ** main.c
 */
-int			error(int e);
+void			intro(t_env *m);
+int				keyfunction(int key, t_env *m);
+void			help_msg(void);
+int				error(int e);
 
 /*
 ** init.c
 */
-void			intro(t_env *m);
 void			init_mlx(t_env *m);
+void			init_mlx_2(t_env *m);
 void			init_env(t_env *m);
 void			init_texture(t_env *m);
+void			init_texture_2(t_env *m);
 
 /* 
 **map.c
@@ -208,8 +212,9 @@ void			plot_wall(t_env *m, int x);
 ** hooks.c
 */
 
-void			key_leftright(int key, t_env *m);
+void			key_right(int key, t_env *m);
+void			key_left(int key, t_env *m);
+void			key_speed(int key, t_env *m);
 void			key_updown(int key, t_env *m);
 int				key_exit(t_env *m);
-int				keyfunction(int key, t_env *m);
 #endif
