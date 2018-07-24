@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:57:47 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/19 10:44:23 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/20 13:34:38 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ int		validation(t_env *m)
 		j = -1;
 		while (++j < m->map_maxx)
 		{
-			if (m->map[i][j].type < 0 || m->map[i][j].type > 9)
-				e = 2;
-			else if (m->map[0][j].type != 1 ||
-					m->map[m->map_maxy - 1][j].type != 1)
-				e = 2;
-			else if (m->map[i][0].type != 1 ||
+			if (m->map[i][j].type < 0 || m->map[i][j].type > 9 ||
+					m->map[0][j].type != 1 || m->map[m->map_maxy - 1][j].type
+					!= 1 || m->map[i][0].type != 1 ||
 					m->map[i][m->map_maxx - 1].type != 1)
+			{
 				e = 2;
+				return (error(e));
+			}
 			else
 				e = 0;
 		}
 	}
-	return (error(e));
+	return (0);
 }
 
 void	map_malloc(t_env *m)
@@ -92,6 +92,5 @@ void	map_size(t_env *m, char *av)
 		m->map_maxx = ft_wdcount(line, ' ') + 1;
 		ft_strdel(&line);
 	}
-	(m->map_maxx = m->map_maxy) ? 0 : error(2);
 	close(fd);
 }

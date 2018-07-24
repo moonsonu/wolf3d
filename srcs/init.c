@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:58:17 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/19 11:36:55 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/24 13:43:41 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ void	init_mlx_2(t_env *m)
 			&(m->xpm.xpm_i_x), &(m->xpm.xpm_i_y));
 	m->xpm.xpm_i_addr = (int*)mlx_get_data_addr(m->xpm.xpm_intro,
 			&(m->xpm.xpm_i_b), &(m->xpm.xpm_i_s), &(m->xpm.xpm_i_e));
+	m->xpm.xpm_sprite = mlx_xpm_file_to_image(m->mlx_ptr, "./xpm/barrel.xpm",
+			&(m->xpm.xpm_s_x), &(m->xpm.xpm_s_y));
+	m->xpm.xpm_s_addr = (int*)mlx_get_data_addr(m->xpm.xpm_sprite,
+			&(m->xpm.xpm_s_b), &(m->xpm.xpm_s_s), &(m->xpm.xpm_s_e));
 }
 
 void	init_env(t_env *m)
@@ -67,6 +71,8 @@ void	init_env(t_env *m)
 	m->texture[3] = malloc(4 * (m->xpm.xpm_c_x * m->xpm.xpm_c_y));
 	m->texture[4] = malloc(4 * (m->xpm.xpm_h_x * m->xpm.xpm_h_y));
 	m->texture[5] = malloc(4 * (m->xpm.xpm_i_x * m->xpm.xpm_i_y));
+
+	m->texture[6] = malloc(4 * (m->xpm.xpm_s_x * m->xpm.xpm_s_y));
 }
 
 void	init_texture(t_env *m)
@@ -116,5 +122,13 @@ void	init_texture_2(t_env *m)
 		while (++x < m->xpm.xpm_i_x)
 			m->texture[5][m->xpm.xpm_i_x * y + x] =
 				m->xpm.xpm_i_addr[m->xpm.xpm_i_x * y + x];
+	}
+	y = -1;
+	while (++y < m->xpm.xpm_s_y)
+	{
+		x = -1;
+		while (++x < m->xpm.xpm_s_x)
+			m->texture[6][m->xpm.xpm_s_x * y + x] =
+				m->xpm.xpm_s_addr[m->xpm.xpm_s_x * y + x];
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:20:10 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/19 11:34:55 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/20 16:15:52 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		main(int ac, char **av)
 	ft_bzero(&r, sizeof(r));
 	if (ac != 2)
 		error(1);
-	help_msg();
+//	help_msg();
 	map_size(&m, av[1]);
 	map_read(&m, av[1]);
 	init_mlx(&m);

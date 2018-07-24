@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 16:39:24 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/19 11:22:33 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/24 14:16:03 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	plot_sky(t_env *m, int x)
 	int		y;
 
 	y = -1;
-	while (++y < 500)
+	while (++y < WINDOW / 2)
 	{
 		m->ray.d = (y * 256 - WINDOW * 128 + m->ray.lineheight * 128);
 		m->ray.texY = ((m->ray.d * TEXTHT) / m->ray.lineheight) / 256;
@@ -85,8 +85,11 @@ void	plot_wall(t_env *m, int x)
 	{
 		m->ray.d = y * 256 - WINDOW * 128 + m->ray.lineheight * 128;
 		m->ray.texY = ((m->ray.d * TEXTHT) / m->ray.lineheight) / 256;
-		m->ray.color = m->texture[m->ray.textnum][(int)(TEXTWD *
+		if (m->ray.textnum != 3)
+			m->ray.color = m->texture[m->ray.textnum][(int)(TEXTWD *
 				m->ray.texY + m->ray.texX)];
+		else if (m->ray.textnum == 3)
+			m->ray.color = m->texture[6][(m->xpm.xpm_s_y * m->ray.texY + m->ray.texX)];
 		if (m->ray.side == 1)
 			m->ray.color = (m->ray.color >> 1) & 8355711;
 		m->data[y * ((int)WINDOW) + x] = m->ray.color;

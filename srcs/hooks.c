@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 17:09:43 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/19 11:13:53 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/22 16:33:15 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	key_right(int key, t_env *m)
 	double	tmpdir_x;
 	double	tmpplane_x;
 
+	m->ray.movespeed = 0.1;
 	if (key == 124)
 	{
 		tmpdir_x = m->ray.dirX;
@@ -37,6 +38,7 @@ void	key_left(int key, t_env *m)
 	double tmpdir_x;
 	double tmpplane_x;
 
+	m->ray.movespeed = 0.1;
 	if (key == 123)
 	{
 		tmpdir_x = m->ray.dirX;
@@ -64,8 +66,6 @@ void	key_speed(int key, t_env *m)
 				[(int)m->ray.posX].type)
 			m->ray.posY += m->ray.dirY * m->ray.movespeed;
 	}
-	else if (key != 1)
-		m->ray.movespeed = 0.1;
 }
 
 void	key_updown(int key, t_env *m)
