@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/24 13:35:59 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/24 19:16:35 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct	s_ray
 	int			textnum;
 	double		movespeed;
 	double		rotspeed;
+	int			numsprite;
 }				t_ray;
 
 typedef struct	s_map
@@ -127,13 +128,14 @@ typedef struct	s_map
 
 typedef struct	s_sprite
 {
-	double		x;
-	double		y;
+	int		x;
+	int		y;
 	int			texture;
 }				t_sprite;
 
 typedef struct	s_p_spt
 {
+	double		*zbuffer;
 	int			*spriteorder;
 	double		*spritedistance;
 	int			numsprites;
@@ -153,6 +155,8 @@ typedef struct	s_p_spt
 	int			s_d;
 	double		spriteX;
 	double		spriteY;
+	int			stripe;
+	int			d;
 }				t_p_spt;
 
 typedef struct	s_env
@@ -160,8 +164,8 @@ typedef struct	s_env
 	t_ray		ray;
 	t_xpm		xpm;
 	t_map		**map;
-//	t_sprite	*sprite;
-//	t_p_spt		spt;
+	t_sprite	*sprite;
+	t_p_spt		spt;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*image;
@@ -224,4 +228,12 @@ void			key_left(int key, t_env *m);
 void			key_speed(int key, t_env *m);
 void			key_updown(int key, t_env *m);
 int				key_exit(t_env *m);
+
+/*
+** sprite.c
+*/
+
+void			parse_sprite(t_env *m);
+void			init_sprite(t_env *m);
+void			ray_sprite(t_env *m, int x);
 #endif

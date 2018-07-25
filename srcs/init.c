@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:58:17 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/24 13:43:41 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/24 19:16:31 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	init_env(t_env *m)
 {
 	int		i;
 
+	m->sprite = ft_memalloc(sizeof(int*) * (m->ray.numsprite + 1));
+	parse_sprite(m);
 	m->ray.posX = 2;
 	m->ray.posY = 2;
 	m->ray.dirX = -1;

@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:57:47 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/20 13:34:38 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/24 18:41:39 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	map_read(t_env *m, char *av)
 
 	i = -1;
 	fd = open(av, O_RDONLY);
+	m->ray.numsprite = 0;
 	map_malloc(m);
 	while (++i < m->map_maxy + 1)
 	{
@@ -67,7 +68,11 @@ void	map_read(t_env *m, char *av)
 			split = ft_strsplit(line, ' ');
 			j = -1;
 			while (++j < m->map_maxx + 1 && split[j])
+			{
 				m->map[i][j].type = ft_atoi(split[j]);
+				if (m->map[i][j].type == 3)
+					m->ray.numsprite++;
+			}
 			ft_splitdel(split);
 			ft_strdel(&line);
 		}
