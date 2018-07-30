@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 17:09:43 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/22 16:33:15 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/29 18:03:27 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int		key_exit(t_env *m)
 {
 	int		i;
 
+	system("killall afplay");
 	if (m->image)
 		mlx_destroy_image(m->mlx_ptr, m->image);
 	if (m->win_ptr)

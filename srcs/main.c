@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:20:10 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/24 17:18:43 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/29 18:07:10 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	intro(t_env *m)
 	i = 0;
 	y = -1;
 	mlx_hook(m->win_ptr, 2, 0, keyfunction, m);
+	mlx_hook(m->win_ptr, 17, 0, key_exit, m);
 	intro.image = mlx_new_image(m->mlx_ptr, (m->xpm.xpm_i_x), (m->xpm.xpm_i_y));
 	intro.data = (int*)mlx_get_data_addr(intro.image, &m->bbp,
 			&m->size, &m->endian);
@@ -80,6 +81,7 @@ int		main(int ac, char **av)
 	if (ac != 2)
 		error(1);
 	help_msg();
+	system("afplay ./xpm/bb.mp3 &");
 	map_size(&m, av[1]);
 	map_read(&m, av[1]);
 	init_mlx(&m);
@@ -87,8 +89,6 @@ int		main(int ac, char **av)
 	init_texture(&m);
 	intro(&m);
 	raycasting(&m);
-	mlx_hook(m.win_ptr, 2, 0, keyfunction, &m);
-	mlx_hook(m.win_ptr, 17, 0, key_exit, &m);
 	mlx_put_image_to_window(m.mlx_ptr, m.win_ptr, m.image, 0, 0);
 	plot_car(&m);
 	mlx_loop(m.mlx_ptr);
