@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 17:09:43 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/29 18:03:27 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/29 18:15:15 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	key_left(int key, t_env *m)
 
 void	key_speed(int key, t_env *m)
 {
+	system("afplay -t 0.5 ./sound/woo.wav &");
 	if (key == 1)
 	{
 		m->ray.movespeed = 0.5;
