@@ -6,11 +6,79 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 16:39:24 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/24 15:35:58 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/31 15:51:34 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+void	put_pixel(t_env *m, int x, int y)
+{
+	t_env	p;
+	int		i;
+
+	ft_bzero(&p, sizeof(p));
+	p.image = mlx_new_image(m->mlx_ptr, WINDOW, WINDOW);
+	p.data = (int*)mlx_get_data_addr(p.image, &m->bbp, &m->size, &m->endian);
+	if ((x > 0 && x < WINDOW) && (y > 0 && y < WINDOW))
+	{
+		i = (y * m->map_maxy) + (x * m->map_maxx);
+		p.data[i] = m->color.b;
+		p.data[i + 1] = m->color.g;
+		p.data[i + 2] = m->color.r;
+	}
+	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, p.image, 0, 0);
+}
+void	ft_color(t_env *m, int r, int g, int b)
+{
+	m->color.r = r;
+	m->color.g = g;
+	m->color.b = b;
+}
+
+void	draw_minimap(t_env *m, int x, int y)
+{
+	int		px;
+	int		py;
+	int		i;
+	int		j;
+
+	py = WINDOW - (5 * m->map_maxy);
+	px = WINDOW - (25 + (5 * m->map_maxx));
+	j = -1;
+	while (++j <= 5)
+	{
+		i = -1;
+		while (++i <= 5)
+			put_pixel(m, px + (x + i), py + (y + j));
+	}
+}
+
+void	plot_minimap(t_env *m)
+{
+	int		x;
+	int		y;
+	int		px;
+	int		py;
+
+	py = m->ray.posY;
+	px = m->ray.posX;
+	y = -1;
+	while (++y < m->map_maxy)
+	{
+		x = -1;
+		while (++x < m->map_maxx)
+		{
+			if (m->map[y][x].type == 1)
+				ft_color(m, 0, 0, 0);
+			else if (y == py && x == px)
+				ft_color(m, 255, 0, 0);
+			else
+				ft_color(m, 255, 255, 255);
+			draw_minimap(m, 5 * y, 5 * x);
+		}
+	}
+}
 
 void	plot_car(t_env *m)
 {

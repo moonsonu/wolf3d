@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 22:00:08 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/24 19:07:04 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/31 15:39:25 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ void	raycasting(t_env *m)
 		plot_floor(m, x);
 		m->spt.zbuffer[x] = m->ray.perpwalldist;
 		ray_sprite(m, x);
+		plot_minimap(m);
 	}
 }

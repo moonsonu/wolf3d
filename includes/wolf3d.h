@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/24 19:16:35 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/31 15:51:37 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,13 @@ typedef struct	s_p_spt
 	int			d;
 }				t_p_spt;
 
+typedef struct	s_color
+{
+	int			r;
+	int			g;
+	int			b;
+}				t_color;
+
 typedef struct	s_env
 {
 	t_ray		ray;
@@ -166,6 +173,7 @@ typedef struct	s_env
 	t_map		**map;
 	t_sprite	*sprite;
 	t_p_spt		spt;
+	t_color		color;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*image;
@@ -218,6 +226,7 @@ void			plot_car(t_env *m);
 void			plot_floor(t_env *m, int x);
 void			plot_sky(t_env *m, int x);
 void			plot_wall(t_env *m, int x);
+void			plot_minimap(t_env *m);
 
 /*
 ** hooks.c

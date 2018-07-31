@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 21:03:33 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/25 18:25:47 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/29 18:16:52 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,6 @@ void	ray_sprite(t_env *m, int x)
 	int		i;
 	int		y;
 
-/*	i = -1;
-	while (++i < m->ray.numsprite)
-	{
-		m->spt.spriteorder[i] = i;
-		//m->spt.spritedistance[i] = ((m->ray.posX - m->sprite[i].x) * (m->ray.posX - m->sprite[i].x) + (m->ray.posY - m->sprite[i].y) * (m->ray.posY - m->sprite[i].y));
-	}*/
 	i = -1;
 	while (++i < m->ray.numsprite)
 	{
