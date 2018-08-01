@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:16:35 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/31 15:51:37 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/31 18:29:47 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,40 +77,40 @@ typedef struct	s_xpm
 
 typedef struct	s_ray
 {
-	double		posX;
-	double		posY;
-	double		dirX;
-	double		dirY;
-	double		planeX;
-	double		planeY;
-	double		raydirX;
-	double		raydirY;
-	int			mapX;
-	int			mapY;
-	double		cameraX;
-	double		deltadistX;
-	double		deltadistY;
-	double		sidedistX;
-	double		sidedistY;
-	int			stepX;
-	int			stepY;
+	double		posx;
+	double		posy;
+	double		dirx;
+	double		diry;
+	double		planex;
+	double		planey;
+	double		raydirx;
+	double		raydiry;
+	int			mapx;
+	int			mapy;
+	double		camerax;
+	double		deltadistx;
+	double		deltadisty;
+	double		sidedistx;
+	double		sidedisty;
+	int			stepx;
+	int			stepy;
 	double		perpwalldist;
-	double		wallX;
+	double		wallx;
 	int			lineheight;
 	int			side;
 	int			hit;
-	double		floorX;
-	double		floorY;
+	double		floorx;
+	double		floory;
 	double		distwall;
 	double		distpos;
 	double		distcurr;
 	double		weight;
-	double		currfloorX;
-	double		currfloorY;
-	int			floortextX;
-	int			floortextY;
-	int			texX;
-	int			texY;
+	double		currfloorx;
+	double		currfloory;
+	int			floortextx;
+	int			floortexty;
+	int			texx;
+	int			texy;
 	int			color;
 	int			start;
 	int			end;
@@ -118,7 +118,6 @@ typedef struct	s_ray
 	int			textnum;
 	double		movespeed;
 	double		rotspeed;
-	int			numsprite;
 }				t_ray;
 
 typedef struct	s_map
@@ -126,54 +125,12 @@ typedef struct	s_map
 	int			type;
 }				t_map;
 
-typedef struct	s_sprite
-{
-	int		x;
-	int		y;
-	int			texture;
-}				t_sprite;
-
-typedef struct	s_p_spt
-{
-	double		*zbuffer;
-	int			*spriteorder;
-	double		*spritedistance;
-	int			numsprites;
-	double		invdet;
-	double		transformX;
-	double		transformY;
-	int			spritescreenX;
-	int			vmovescreen;
-	int			spriteheight;
-	int			drawstartX;
-	int			drawstartY;
-	int			drawendX;
-	int			drawendY;
-	int			spritewidth;
-	int			s_texX;
-	int			s_texY;
-	int			s_d;
-	double		spriteX;
-	double		spriteY;
-	int			stripe;
-	int			d;
-}				t_p_spt;
-
-typedef struct	s_color
-{
-	int			r;
-	int			g;
-	int			b;
-}				t_color;
-
 typedef struct	s_env
 {
 	t_ray		ray;
 	t_xpm		xpm;
 	t_map		**map;
-	t_sprite	*sprite;
-	t_p_spt		spt;
-	t_color		color;
+	int			color;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*image;
@@ -203,7 +160,7 @@ void			init_env(t_env *m);
 void			init_texture(t_env *m);
 void			init_texture_2(t_env *m);
 
-/* 
+/*
 **map.c
 */
 void			map_malloc(t_env *m);
@@ -226,7 +183,6 @@ void			plot_car(t_env *m);
 void			plot_floor(t_env *m, int x);
 void			plot_sky(t_env *m, int x);
 void			plot_wall(t_env *m, int x);
-void			plot_minimap(t_env *m);
 
 /*
 ** hooks.c
@@ -239,10 +195,11 @@ void			key_updown(int key, t_env *m);
 int				key_exit(t_env *m);
 
 /*
-** sprite.c
+** minimap.c
 */
 
-void			parse_sprite(t_env *m);
-void			init_sprite(t_env *m);
-void			ray_sprite(t_env *m, int x);
+void			plot_mm(t_env *m, int x, int s, int e);
+void			plot_square(t_env *m, int x, int y);
+void			plot_dot(t_env *m);
+void			minimap(t_env *m);
 #endif

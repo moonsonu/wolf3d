@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 17:09:43 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/29 18:15:15 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/31 18:16:55 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ void	key_right(int key, t_env *m)
 	m->ray.movespeed = 0.1;
 	if (key == 124)
 	{
-		tmpdir_x = m->ray.dirX;
-		m->ray.dirX = m->ray.dirX * cos(-(m->ray.rotspeed)) -
-			m->ray.dirY * sin(-(m->ray.rotspeed));
-		m->ray.dirY = tmpdir_x * sin(-(m->ray.rotspeed)) +
-			m->ray.dirY * cos(-(m->ray.rotspeed));
-		tmpplane_x = m->ray.planeX;
-		m->ray.planeX = m->ray.planeX * cos(-(m->ray.rotspeed)) -
-			m->ray.planeY * sin(-(m->ray.rotspeed));
-		m->ray.planeY = tmpplane_x * sin(-(m->ray.rotspeed)) +
-			m->ray.planeY * cos(-(m->ray.rotspeed));
+		tmpdir_x = m->ray.dirx;
+		m->ray.dirx = m->ray.dirx * cos(-(m->ray.rotspeed)) -
+			m->ray.diry * sin(-(m->ray.rotspeed));
+		m->ray.diry = tmpdir_x * sin(-(m->ray.rotspeed)) +
+			m->ray.diry * cos(-(m->ray.rotspeed));
+		tmpplane_x = m->ray.planex;
+		m->ray.planex = m->ray.planex * cos(-(m->ray.rotspeed)) -
+			m->ray.planey * sin(-(m->ray.rotspeed));
+		m->ray.planey = tmpplane_x * sin(-(m->ray.rotspeed)) +
+			m->ray.planey * cos(-(m->ray.rotspeed));
 	}
 }
 
@@ -41,16 +41,16 @@ void	key_left(int key, t_env *m)
 	m->ray.movespeed = 0.1;
 	if (key == 123)
 	{
-		tmpdir_x = m->ray.dirX;
-		m->ray.dirX = m->ray.dirX * cos(m->ray.rotspeed) -
-			m->ray.dirY * sin(m->ray.rotspeed);
-		m->ray.dirY = tmpdir_x * sin(m->ray.rotspeed) +
-			m->ray.dirY * cos(m->ray.rotspeed);
-		tmpplane_x = m->ray.planeX;
-		m->ray.planeX = m->ray.planeX * cos(m->ray.rotspeed) -
-			m->ray.planeY * sin(m->ray.rotspeed);
-		m->ray.planeY = tmpplane_x * sin(m->ray.rotspeed) +
-			m->ray.planeY * cos(m->ray.rotspeed);
+		tmpdir_x = m->ray.dirx;
+		m->ray.dirx = m->ray.dirx * cos(m->ray.rotspeed) -
+			m->ray.diry * sin(m->ray.rotspeed);
+		m->ray.diry = tmpdir_x * sin(m->ray.rotspeed) +
+			m->ray.diry * cos(m->ray.rotspeed);
+		tmpplane_x = m->ray.planex;
+		m->ray.planex = m->ray.planex * cos(m->ray.rotspeed) -
+			m->ray.planey * sin(m->ray.rotspeed);
+		m->ray.planey = tmpplane_x * sin(m->ray.rotspeed) +
+			m->ray.planey * cos(m->ray.rotspeed);
 	}
 }
 
@@ -60,12 +60,12 @@ void	key_speed(int key, t_env *m)
 	if (key == 1)
 	{
 		m->ray.movespeed = 0.5;
-		if (!m->map[(int)m->ray.posY][(int)(m->ray.posX +
-					m->ray.dirX * m->ray.movespeed)].type)
-			m->ray.posX += m->ray.dirX * m->ray.movespeed;
-		if (!m->map[(int)(m->ray.posY + m->ray.dirY * m->ray.movespeed)]
-				[(int)m->ray.posX].type)
-			m->ray.posY += m->ray.dirY * m->ray.movespeed;
+		if (!m->map[(int)m->ray.posy][(int)(m->ray.posx +
+					m->ray.dirx * m->ray.movespeed)].type)
+			m->ray.posx += m->ray.dirx * m->ray.movespeed;
+		if (!m->map[(int)(m->ray.posy + m->ray.diry * m->ray.movespeed)]
+				[(int)m->ray.posx].type)
+			m->ray.posy += m->ray.diry * m->ray.movespeed;
 	}
 }
 
@@ -73,21 +73,21 @@ void	key_updown(int key, t_env *m)
 {
 	if (key == 126)
 	{
-		if (!m->map[(int)m->ray.posY][(int)(m->ray.posX +
-					m->ray.dirX * m->ray.movespeed)].type)
-			m->ray.posX += m->ray.dirX * m->ray.movespeed;
-		if (!m->map[(int)(m->ray.posY + m->ray.dirY * m->ray.movespeed)]
-				[(int)m->ray.posX].type)
-			m->ray.posY += m->ray.dirY * m->ray.movespeed;
+		if (!m->map[(int)m->ray.posy][(int)(m->ray.posx +
+					m->ray.dirx * m->ray.movespeed)].type)
+			m->ray.posx += m->ray.dirx * m->ray.movespeed;
+		if (!m->map[(int)(m->ray.posy + m->ray.diry * m->ray.movespeed)]
+				[(int)m->ray.posx].type)
+			m->ray.posy += m->ray.diry * m->ray.movespeed;
 	}
 	if (key == 125)
 	{
-		if (!m->map[(int)m->ray.posY][(int)(m->ray.posX -
-					m->ray.dirX * m->ray.movespeed)].type)
-			m->ray.posX -= m->ray.dirX * m->ray.movespeed;
-		if (!m->map[(int)(m->ray.posY - m->ray.dirY * m->ray.movespeed)]
-				[(int)m->ray.posX].type)
-			m->ray.posY -= m->ray.dirY * m->ray.movespeed;
+		if (!m->map[(int)m->ray.posy][(int)(m->ray.posx -
+					m->ray.dirx * m->ray.movespeed)].type)
+			m->ray.posx -= m->ray.dirx * m->ray.movespeed;
+		if (!m->map[(int)(m->ray.posy - m->ray.diry * m->ray.movespeed)]
+				[(int)m->ray.posx].type)
+			m->ray.posy -= m->ray.diry * m->ray.movespeed;
 	}
 }
 

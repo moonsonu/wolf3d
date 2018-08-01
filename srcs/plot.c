@@ -6,79 +6,11 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 16:39:24 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/31 15:51:34 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/31 18:23:44 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
-void	put_pixel(t_env *m, int x, int y)
-{
-	t_env	p;
-	int		i;
-
-	ft_bzero(&p, sizeof(p));
-	p.image = mlx_new_image(m->mlx_ptr, WINDOW, WINDOW);
-	p.data = (int*)mlx_get_data_addr(p.image, &m->bbp, &m->size, &m->endian);
-	if ((x > 0 && x < WINDOW) && (y > 0 && y < WINDOW))
-	{
-		i = (y * m->map_maxy) + (x * m->map_maxx);
-		p.data[i] = m->color.b;
-		p.data[i + 1] = m->color.g;
-		p.data[i + 2] = m->color.r;
-	}
-	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, p.image, 0, 0);
-}
-void	ft_color(t_env *m, int r, int g, int b)
-{
-	m->color.r = r;
-	m->color.g = g;
-	m->color.b = b;
-}
-
-void	draw_minimap(t_env *m, int x, int y)
-{
-	int		px;
-	int		py;
-	int		i;
-	int		j;
-
-	py = WINDOW - (5 * m->map_maxy);
-	px = WINDOW - (25 + (5 * m->map_maxx));
-	j = -1;
-	while (++j <= 5)
-	{
-		i = -1;
-		while (++i <= 5)
-			put_pixel(m, px + (x + i), py + (y + j));
-	}
-}
-
-void	plot_minimap(t_env *m)
-{
-	int		x;
-	int		y;
-	int		px;
-	int		py;
-
-	py = m->ray.posY;
-	px = m->ray.posX;
-	y = -1;
-	while (++y < m->map_maxy)
-	{
-		x = -1;
-		while (++x < m->map_maxx)
-		{
-			if (m->map[y][x].type == 1)
-				ft_color(m, 0, 0, 0);
-			else if (y == py && x == px)
-				ft_color(m, 255, 0, 0);
-			else
-				ft_color(m, 255, 255, 255);
-			draw_minimap(m, 5 * y, 5 * x);
-		}
-	}
-}
 
 void	plot_car(t_env *m)
 {
@@ -115,14 +47,14 @@ void	plot_floor(t_env *m, int x)
 		m->ray.distcurr = WINDOW / (2.0 * y - WINDOW);
 		m->ray.weight = (m->ray.distcurr - m->ray.distpos) /
 			(m->ray.distwall - m->ray.distpos);
-		m->ray.currfloorX = m->ray.weight * m->ray.floorX +
-			(1.0 - m->ray.weight) * m->ray.posX;
-		m->ray.currfloorY = m->ray.weight * m->ray.floorY +
-			(1.0 - m->ray.weight) * m->ray.posY;
-		m->ray.floortextX = (int)(m->ray.currfloorX * TEXTWD) % (int)TEXTWD;
-		m->ray.floortextY = (int)(m->ray.currfloorY * TEXTHT) % (int)TEXTHT;
+		m->ray.currfloorx = m->ray.weight * m->ray.floorx +
+			(1.0 - m->ray.weight) * m->ray.posx;
+		m->ray.currfloory = m->ray.weight * m->ray.floory +
+			(1.0 - m->ray.weight) * m->ray.posy;
+		m->ray.floortextx = (int)(m->ray.currfloorx * TEXTWD) % (int)TEXTWD;
+		m->ray.floortexty = (int)(m->ray.currfloory * TEXTHT) % (int)TEXTHT;
 		m->data[y * (int)WINDOW + x] = ((m->texture[0][(int)(TEXTHT * m->ray.
-						floortextY + m->ray.floortextX)]) >> 1) & 8355711;
+						floortexty + m->ray.floortextx)]) >> 1) & 8355711;
 	}
 }
 
@@ -134,7 +66,7 @@ void	plot_sky(t_env *m, int x)
 	while (++y < WINDOW / 2)
 	{
 		m->ray.d = (y * 256 - WINDOW * 128 + m->ray.lineheight * 128);
-		m->ray.texY = ((m->ray.d * TEXTHT) / m->ray.lineheight) / 256;
+		m->ray.texy = ((m->ray.d * TEXTHT) / m->ray.lineheight) / 256;
 		m->data[y * ((int)WINDOW) + x] = m->texture[3][(int)(WINDOW * y + x)];
 	}
 }
@@ -143,19 +75,19 @@ void	plot_wall(t_env *m, int x)
 {
 	int		y;
 
-	m->ray.texX = (int)(m->ray.wallX * (double)TEXTWD);
-	if (m->ray.side == 0 && m->ray.raydirX > 0)
-		m->ray.texX = TEXTWD - m->ray.texX - 1;
-	if (m->ray.side == 1 && m->ray.raydirY < 0)
-		m->ray.texX = TEXTWD - m->ray.texX - 1;
+	m->ray.texx = (int)(m->ray.wallx * (double)TEXTWD);
+	if (m->ray.side == 0 && m->ray.raydirx > 0)
+		m->ray.texx = TEXTWD - m->ray.texx - 1;
+	if (m->ray.side == 1 && m->ray.raydiry < 0)
+		m->ray.texx = TEXTWD - m->ray.texx - 1;
 	y = m->ray.start - 1;
 	while (++y < m->ray.end)
 	{
 		m->ray.d = y * 256 - WINDOW * 128 + m->ray.lineheight * 128;
-		m->ray.texY = ((m->ray.d * TEXTHT) / m->ray.lineheight) / 256;
+		m->ray.texy = ((m->ray.d * TEXTHT) / m->ray.lineheight) / 256;
 		if (m->ray.textnum != 3)
 			m->ray.color = m->texture[m->ray.textnum][(int)(TEXTWD *
-				m->ray.texY + m->ray.texX)];
+				m->ray.texy + m->ray.texx)];
 		if (m->ray.side == 1)
 			m->ray.color = (m->ray.color >> 1) & 8355711;
 		m->data[y * ((int)WINDOW) + x] = m->ray.color;

@@ -6,7 +6,7 @@
 #    By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/29 17:16:50 by ksonu             #+#    #+#              #
-#    Updated: 2018/07/24 17:57:32 by ksonu            ###   ########.fr        #
+#    Updated: 2018/07/31 18:28:30 by ksonu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC = main.c	\
 	  wolf.c	\
 	  hooks.c	\
 	  plot.c	\
-	  sprite.c
+	  minimap.c
 OBJ = $(SRC:.c=.o)
 MLX = -L $(MLXDIR) -fsanitize=address -lmlx -framework OpenGL -framework Appkit
 

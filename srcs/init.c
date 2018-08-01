@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:58:17 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/31 15:51:32 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/31 18:27:55 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,12 @@ void	init_env(t_env *m)
 {
 	int		i;
 
-	m->sprite = ft_memalloc(sizeof(int*) * (m->ray.numsprite + 1));
-	parse_sprite(m);
-	m->ray.posX = 2;
-	m->ray.posY = 2;
-	m->ray.dirX = -1;
-	m->ray.dirY = 0;
-	m->ray.planeX = 0;
-	m->ray.planeY = 0.66;
+	m->ray.posx = 2;
+	m->ray.posy = 2;
+	m->ray.dirx = -1;
+	m->ray.diry = 0;
+	m->ray.planex = 0;
+	m->ray.planey = 0.66;
 	m->ray.movespeed = 0.1;
 	m->ray.rotspeed = 0.1;
 	i = -1;
@@ -73,7 +71,6 @@ void	init_env(t_env *m)
 	m->texture[3] = malloc(4 * (m->xpm.xpm_c_x * m->xpm.xpm_c_y));
 	m->texture[4] = malloc(4 * (m->xpm.xpm_h_x * m->xpm.xpm_h_y));
 	m->texture[5] = malloc(4 * (m->xpm.xpm_i_x * m->xpm.xpm_i_y));
-
 	m->texture[6] = malloc(4 * (m->xpm.xpm_s_x * m->xpm.xpm_s_y));
 }
 
@@ -124,13 +121,5 @@ void	init_texture_2(t_env *m)
 		while (++x < m->xpm.xpm_i_x)
 			m->texture[5][m->xpm.xpm_i_x * y + x] =
 				m->xpm.xpm_i_addr[m->xpm.xpm_i_x * y + x];
-	}
-	y = -1;
-	while (++y < m->xpm.xpm_s_y)
-	{
-		x = -1;
-		while (++x < m->xpm.xpm_s_x)
-			m->texture[6][m->xpm.xpm_s_x * y + x] =
-				m->xpm.xpm_s_addr[m->xpm.xpm_s_x * y + x];
 	}
 }
