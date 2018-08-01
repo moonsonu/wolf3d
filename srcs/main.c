@@ -33,7 +33,7 @@ void	intro(t_env *m)
 			intro.data[(y * m->xpm.xpm_i_x) + x] = m->texture[5][i++];
 	}
 	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, intro.image, 0, 0);
-	mlx_string_put(m->mlx_ptr, m->win_ptr, 500, 500, 0xFFFFFF,
+	mlx_string_put(m->mlx_ptr, m->win_ptr, 500, 900, 0xFFFFFF,
 			"PRESS ANY KEY TO START");
 	mlx_loop(m->mlx_ptr);
 }
