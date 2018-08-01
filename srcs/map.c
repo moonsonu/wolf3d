@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:57:47 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/31 18:17:40 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/07/31 18:40:16 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,17 @@ void	map_read(t_env *m, char *av)
 
 void	map_size(t_env *m, char *av)
 {
+	int		e;
 	int		fd;
 	int		i;
 	char	*line;
 
 	i = -1;
-	fd = open(av, O_RDONLY);
+	if (!(fd = open(av, O_RDONLY)))
+	{
+		e = 2;
+		error(e);
+	}
 	m->map_maxx = 0;
 	m->map_maxy = 0;
 	while (get_next_line(fd, &line) > 0)
