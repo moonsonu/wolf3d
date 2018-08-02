@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:57:47 by ksonu             #+#    #+#             */
-/*   Updated: 2018/08/01 17:11:05 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/08/01 17:43:39 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	map_malloc(t_env *m)
 	int		i;
 
 	i = -1;
-	m->map = ft_memalloc(sizeof(int*) * (m->map_maxx + 1));
-	while (++i < m->map_maxx)
-		m->map[i] = malloc(sizeof(int) * (m->map_maxy + 1));
+	m->map = ft_memalloc(sizeof(int*) * (m->map_maxy + 1));
+	while (++i < m->map_maxy)
+		m->map[i] = malloc(sizeof(int) * (m->map_maxx + 1));
 }
 
 void	map_read(t_env *m, char *av)
@@ -61,9 +61,7 @@ void	map_read(t_env *m, char *av)
 			split = ft_strsplit(line, ' ');
 			j = -1;
 			while (++j < m->map_maxx + 1 && split[j])
-			{
 				m->map[i][j].type = ft_atoi(split[j]);
-			}
 			ft_splitdel(split);
 			ft_strdel(&line);
 		}

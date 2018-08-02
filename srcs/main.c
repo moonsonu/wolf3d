@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:20:10 by ksonu             #+#    #+#             */
-/*   Updated: 2018/08/01 17:17:03 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/08/01 17:43:37 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,16 @@ int		keyfunction(int key, t_env *m)
 
 void	help_msg(void)
 {
+	ft_putendl("██╗    ██╗ ██████╗ ██╗     ███████╗██████╗ ██████╗ ");
+	ft_putendl("██║    ██║██╔═══██╗██║     ██╔════╝╚════██╗██╔══██╗");
+	ft_putendl("██║ █╗ ██║██║   ██║██║     █████╗   █████╔╝██║  ██║");
+	ft_putendl("██║███╗██║██║   ██║██║     ██╔══╝   ╚═══██╗██║  ██║");
+	ft_putendl("╚███╔███╔╝╚██████╔╝███████╗██║     ██████╔╝██████╔╝");
+	ft_putendl(" ╚══╝╚══╝  ╚═════╝ ╚══════╝╚═╝     ╚═════╝ ╚═════╝ \n");
 	ft_putendl("usage : ./wolf3d <map_file>");
-	ft_putendl("Map has to be square and at lease 3x3\n");
+	ft_putendl("Size: at lease 3x3");
+	ft_putendl("Keys: move [ARROWS]");
+	ft_putendl("	  sprint [s]");
 }
 
 int		error(int e)
@@ -79,12 +87,12 @@ int		main(int ac, char **av)
 	if (ac != 2)
 		error(1);
 	help_msg();
-	system("afplay ./sound/bb.mp3 &");
 	map_size(&m, av[1]);
 	map_read(&m, av[1]);
 	init_mlx(&m);
 	init_env(&m);
 	init_texture(&m);
+	system("afplay ./sound/bb.mp3 &");
 	intro(&m);
 	raycasting(&m);
 	mlx_put_image_to_window(m.mlx_ptr, m.win_ptr, m.image, 0, 0);
