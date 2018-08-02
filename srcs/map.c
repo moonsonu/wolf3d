@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:57:47 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/31 18:40:16 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/08/01 17:11:05 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int		validation(t_env *m)
 {
 	int		i;
 	int		j;
-	int		e;
 
 	i = -1;
 	while (++i < m->map_maxy)
@@ -28,12 +27,7 @@ int		validation(t_env *m)
 					m->map[0][j].type != 1 || m->map[m->map_maxy - 1][j].type
 					!= 1 || m->map[i][0].type != 1 ||
 					m->map[i][m->map_maxx - 1].type != 1)
-			{
-				e = 2;
-				return (error(e));
-			}
-			else
-				e = 0;
+				return (error(2));
 		}
 	}
 	return (0);
@@ -80,17 +74,13 @@ void	map_read(t_env *m, char *av)
 
 void	map_size(t_env *m, char *av)
 {
-	int		e;
 	int		fd;
 	int		i;
 	char	*line;
 
 	i = -1;
-	if (!(fd = open(av, O_RDONLY)))
-	{
-		e = 2;
-		error(e);
-	}
+	if ((fd = open(av, O_RDONLY)) < 0)
+		error(2);
 	m->map_maxx = 0;
 	m->map_maxy = 0;
 	while (get_next_line(fd, &line) > 0)

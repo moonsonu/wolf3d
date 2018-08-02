@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:20:10 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/31 18:39:49 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/08/01 17:13:04 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	intro(t_env *m)
 int		keyfunction(int key, t_env *m)
 {
 	ft_bzero(m->data, WINDOW * WINDOW * 4);
-	key == 53 ? exit(0) : 0;
+	key == 53 ? key_exit(m) : 0;
 	(key == 123) ? key_left(key, m) : 0;
 	(key == 124) ? key_right(key, m) : 0;
 	(key == 125 || key == 126 || key == 1) ? key_updown(key, m) : 0;
