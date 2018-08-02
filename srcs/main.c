@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 17:20:10 by ksonu             #+#    #+#             */
-/*   Updated: 2018/08/01 17:43:37 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/08/01 17:53:34 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ int		main(int ac, char **av)
 	ft_bzero(&r, sizeof(r));
 	if (ac != 2)
 		error(1);
-	help_msg();
 	map_size(&m, av[1]);
 	map_read(&m, av[1]);
 	init_mlx(&m);
 	init_env(&m);
 	init_texture(&m);
+	help_msg();
 	system("afplay ./sound/bb.mp3 &");
 	intro(&m);
 	raycasting(&m);
