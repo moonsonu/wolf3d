@@ -6,7 +6,7 @@
 /*   By: ksonu <ksonu@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 21:58:17 by ksonu             #+#    #+#             */
-/*   Updated: 2018/07/31 18:27:55 by ksonu            ###   ########.fr       */
+/*   Updated: 2018/08/01 18:14:46 by ksonu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	init_env(t_env *m)
 
 	m->ray.posx = 2;
 	m->ray.posy = 2;
+	if (m->map[(int)m->ray.posx][(int)m->ray.posy].type == 1)
+		error(2);
 	m->ray.dirx = -1;
 	m->ray.diry = 0;
 	m->ray.planex = 0;
