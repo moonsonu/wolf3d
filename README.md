@@ -20,12 +20,12 @@ Bonus :
 - [X] Floor and ceiling texture
 - [X] Items in the maze
 - [X] Object collision
-- [] Earning points by picking up objects
-- [] Doors can open and close
-- [] Bad guys to fight
-- [] Secret doors
-- [] Animations
-- [] Several levels
+- [ ] Earning points by picking up objects
+- [ ] Doors can open and close
+- [ ] Bad guys to fight
+- [ ] Secret doors
+- [ ] Animations
+- [ ] Several levels
 - [X] Sounds and music
-- [] A Doom Engine
-- [] A Duke Nukem 3D engine
+- [ ] A Doom Engine
+- [ ] A Duke Nukem 3D engine
