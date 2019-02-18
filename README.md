@@ -9,7 +9,22 @@ Language: C
 ## Installation
 ```
 > make
-> ./wolf3d
+> ./wolf3d [map file]
+```
+Examples of map files are in the examples directory
+
+```
+██╗    ██╗ ██████╗ ██╗     ███████╗██████╗ ██████╗
+██║    ██║██╔═══██╗██║     ██╔════╝╚════██╗██╔══██╗
+██║ █╗ ██║██║   ██║██║     █████╗   █████╔╝██║  ██║
+██║███╗██║██║   ██║██║     ██╔══╝   ╚═══██╗██║  ██║
+╚███╔███╔╝╚██████╔╝███████╗██║     ██████╔╝██████╔╝
+ ╚══╝╚══╝  ╚═════╝ ╚══════╝╚═╝     ╚═════╝ ╚═════╝
+
+usage : ./wolf3d [map_file]
+Size: at lease 3x3
+Keys: move   [ARROWS]
+      sprint [s]
 ```
 
 Mandatory Part :
