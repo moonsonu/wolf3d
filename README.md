@@ -6,6 +6,12 @@
 #
 Language: C
 
+## Installation
+```
+> make
+> ./wolf3d
+```
+
 Mandatory Part :
 - [X] Able to choose size and shage of the labyrinth
 - [X] The management of the window remain smooth
